@@ -322,7 +322,7 @@ func (c *MysqlPersistence[T]) EnsureIndex(name string, keys map[string]string, o
 		}
 	}
 
-	builder += "(" + fields + ")"
+	builder += "(`" + fields + "`)"
 
 	c.EnsureSchema(builder)
 }
