@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>persistence - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.18.7";</script>
+<script src="../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:6060/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package persistence
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "persistence"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="index.html#GenerateObjectIdIfNotExists">func GenerateObjectIdIfNotExists[T any](obj any) T</a></dd>
+			
+				
+				<dd><a href="index.html#GenerateObjectMapIdIfNotExists">func GenerateObjectMapIdIfNotExists(objectMap map[string]any)</a></dd>
+			
+				
+				<dd><a href="index.html#GetObjectId">func GetObjectId[K any](obj any) (id K)</a></dd>
+			
+				
+				<dd><a href="index.html#ItemsToAnySlice">func ItemsToAnySlice[T any](items []T) []any</a></dd>
+			
+			
+				
+				<dd><a href="index.html#IMysqlPersistenceOverrides">type IMysqlPersistenceOverrides</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IdentifiableJsonMysqlPersistence">type IdentifiableJsonMysqlPersistence</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#InheritIdentifiableJsonMysqlPersistence">func InheritIdentifiableJsonMysqlPersistence[T any, K any](overrides IMysqlPersistenceOverrides[T], tableName string) *IdentifiableJsonMysqlPersistence[T, K]</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableJsonMysqlPersistence.ConvertFromPublic">func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertFromPublic(value T) (map[string]any, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableJsonMysqlPersistence.ConvertFromPublicPartial">func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertFromPublicPartial(value map[string]any) (map[string]any, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableJsonMysqlPersistence.ConvertToPublic">func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertToPublic(rows *sql.Rows) (T, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableJsonMysqlPersistence.EnsureTable">func (c *IdentifiableJsonMysqlPersistence[T, K]) EnsureTable(idType string, dataType string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableJsonMysqlPersistence.UpdatePartially">func (c *IdentifiableJsonMysqlPersistence[T, K]) UpdatePartially(ctx context.Context, correlationId string, id K, data cdata.AnyValueMap) (result T, err error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#IdentifiableMysqlPersistence">type IdentifiableMysqlPersistence</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#InheritIdentifiableMysqlPersistence">func InheritIdentifiableMysqlPersistence[T any, K any](overrides IMysqlPersistenceOverrides[T], tableName string) *IdentifiableMysqlPersistence[T, K]</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.Create">func (c *IdentifiableMysqlPersistence[T, K]) Create(ctx context.Context, correlationId string, item T) (result T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.DeleteById">func (c *IdentifiableMysqlPersistence[T, K]) DeleteById(ctx context.Context, correlationId string, id K) (result T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.DeleteByIds">func (c *IdentifiableMysqlPersistence[T, K]) DeleteByIds(ctx context.Context, correlationId string, ids []K) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.GetListByIds">func (c *IdentifiableMysqlPersistence[T, K]) GetListByIds(ctx context.Context, correlationId string, ids []K) (items []T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.GetOneById">func (c *IdentifiableMysqlPersistence[T, K]) GetOneById(ctx context.Context, correlationId string, id K) (item T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.Set">func (c *IdentifiableMysqlPersistence[T, K]) Set(ctx context.Context, correlationId string, item T) (result T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.Update">func (c *IdentifiableMysqlPersistence[T, K]) Update(ctx context.Context, correlationId string, item T) (result T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#IdentifiableMysqlPersistence.UpdatePartially">func (c *IdentifiableMysqlPersistence[T, K]) UpdatePartially(ctx context.Context, correlationId string, id K, data cdata.AnyValueMap) (result T, err error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#MysqlPersistence">type MysqlPersistence</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#InheritMysqlPersistence">func InheritMysqlPersistence[T any](overrides IMysqlPersistenceOverrides[T], tableName string) *MysqlPersistence[T]</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.Clear">func (c *MysqlPersistence[T]) Clear(ctx context.Context, correlationId string) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.ClearSchema">func (c *MysqlPersistence[T]) ClearSchema()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.Close">func (c *MysqlPersistence[T]) Close(ctx context.Context, correlationId string) (err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.Configure">func (c *MysqlPersistence[T]) Configure(ctx context.Context, config *cconf.ConfigParams)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.ConvertFromPublic">func (c *MysqlPersistence[T]) ConvertFromPublic(value T) (map[string]any, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.ConvertFromPublicPartial">func (c *MysqlPersistence[T]) ConvertFromPublicPartial(value map[string]any) (map[string]any, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.ConvertToPublic">func (c *MysqlPersistence[T]) ConvertToPublic(rows *sql.Rows) (T, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.Create">func (c *MysqlPersistence[T]) Create(ctx context.Context, correlationId string, item T) (result T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.CreateSchema">func (c *MysqlPersistence[T]) CreateSchema(ctx context.Context, correlationId string) (err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.DefineSchema">func (c *MysqlPersistence[T]) DefineSchema()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.DeleteByFilter">func (c *MysqlPersistence[T]) DeleteByFilter(ctx context.Context, correlationId string, filter string) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.EnsureIndex">func (c *MysqlPersistence[T]) EnsureIndex(name string, keys map[string]string, options map[string]string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.EnsureSchema">func (c *MysqlPersistence[T]) EnsureSchema(schemaStatement string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GenerateColumns">func (c *MysqlPersistence[T]) GenerateColumns(columns []string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GenerateColumnsAndValues">func (c *MysqlPersistence[T]) GenerateColumnsAndValues(objMap map[string]any) ([]string, []any)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GenerateParameters">func (c *MysqlPersistence[T]) GenerateParameters(valuesCount int) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GenerateSetParameters">func (c *MysqlPersistence[T]) GenerateSetParameters(columns []string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GetCountByFilter">func (c *MysqlPersistence[T]) GetCountByFilter(ctx context.Context, correlationId string, filter string) (int64, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GetListByFilter">func (c *MysqlPersistence[T]) GetListByFilter(ctx context.Context, correlationId string, filter string, sort string, selection string) (items []T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GetOneRandom">func (c *MysqlPersistence[T]) GetOneRandom(ctx context.Context, correlationId string, filter string) (item T, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.GetPageByFilter">func (c *MysqlPersistence[T]) GetPageByFilter(ctx context.Context, correlationId string, filter string, paging cdata.PagingParams, sort string, selection string) (page cdata.DataPage[T], err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.IsOpen">func (c *MysqlPersistence[T]) IsOpen() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.IsTerminated">func (c *MysqlPersistence[T]) IsTerminated() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.Open">func (c *MysqlPersistence[T]) Open(ctx context.Context, correlationId string) (err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.QuoteIdentifier">func (c *MysqlPersistence[T]) QuoteIdentifier(value string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.QuotedTableName">func (c *MysqlPersistence[T]) QuotedTableName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.SetReferences">func (c *MysqlPersistence[T]) SetReferences(ctx context.Context, references cref.IReferences)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MysqlPersistence.UnsetReferences">func (c *MysqlPersistence[T]) UnsetReferences()</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go">IdentifiableJsonMysqlPersistence.go</a>
+			
+				<a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go">IdentifiableMysqlPersistence.go</a>
+			
+				<a href="http://localhost:6060/src/persistence/MysqlPersistence.go">MysqlPersistence.go</a>
+			
+				<a href="http://localhost:6060/src/persistence/Utils.go">Utils.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+			
+			
+			<h2 id="GenerateObjectIdIfNotExists">func <a href="http://localhost:6060/src/persistence/Utils.go?s=619:669#L17">GenerateObjectIdIfNotExists</a>
+				<a class="permalink" href="index.html#GenerateObjectIdIfNotExists">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GenerateObjectIdIfNotExists[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>](obj <a href="http://localhost:6060/pkg/builtin/#any">any</a>) T</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GenerateObjectMapIdIfNotExists">func <a href="http://localhost:6060/src/persistence/Utils.go?s=368:429#L9">GenerateObjectMapIdIfNotExists</a>
+				<a class="permalink" href="index.html#GenerateObjectMapIdIfNotExists">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GenerateObjectMapIdIfNotExists(objectMap map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetObjectId">func <a href="http://localhost:6060/src/persistence/Utils.go?s=888:927#L28">GetObjectId</a>
+				<a class="permalink" href="index.html#GetObjectId">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetObjectId[K <a href="http://localhost:6060/pkg/builtin/#any">any</a>](obj <a href="http://localhost:6060/pkg/builtin/#any">any</a>) (id K)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="ItemsToAnySlice">func <a href="http://localhost:6060/src/persistence/Utils.go?s=199:243#L1">ItemsToAnySlice</a>
+				<a class="permalink" href="index.html#ItemsToAnySlice">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ItemsToAnySlice[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>](items []T) []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
+			
+			
+			
+
+		
+		
+			
+			
+			<h2 id="IMysqlPersistenceOverrides">type <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=663:902#L13">IMysqlPersistenceOverrides</a>
+				<a class="permalink" href="index.html#IMysqlPersistenceOverrides">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IMysqlPersistenceOverrides[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>] interface {
+    DefineSchema()
+    ConvertFromPublic(item T) (map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)
+    ConvertToPublic(item *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#Rows">Rows</a>) (T, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)
+    ConvertFromPublicPartial(item map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>) (map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IdentifiableJsonMysqlPersistence">type <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=4052:4153#L86">IdentifiableJsonMysqlPersistence</a>
+				<a class="permalink" href="index.html#IdentifiableJsonMysqlPersistence">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+IdentifiableJsonMysqlPersistence is an abstract persistence component that stores data in MySQL in JSON or JSONB fields
+and implements a number of CRUD operations over data items with unique ids.
+The data items must implement IIdentifiable interface.
+</p>
+<p>
+The JSON table has only two fields: id and data.
+</p>
+<p>
+In basic scenarios child classes shall only override getPageByFilter,
+getListByFilter or deleteByFilter operations with specific filter function.
+All other operations can be used out of the box.
+</p>
+<p>
+In complex scenarios child classes can implement additional operations by
+accessing c._collection and c._model properties.
+</p>
+<pre>Configuration parameters
+
+	- collection:                  (optional) MySQL collection name
+	- connection(s):
+		- discovery_key:             (optional) a key to retrieve the connection from IDiscovery
+		- host:                      host name or IP address
+		- port:                      port number (default: 27017)
+		- uri:                       resource URI or connection string with all parameters in it
+	- credential(s):
+		- store_key:                 (optional) a key to retrieve the credentials from ICredentialStore
+		- username:                  (optional) user name
+		- password:                  (optional) user password
+	- options:
+		- connect_timeout:      (optional) number of milliseconds to wait before timing out when connecting a new client (default: 0)
+		- idle_timeout:         (optional) number of milliseconds a client must sit idle in the pool and not be checked out (default: 10000)
+		- max_pool_size:        (optional) maximum number of clients the pool should contain (default: 10)
+
+References
+	- *:logger:*:*:1.0           (optional) ILogger components to pass log messages components to pass log messages
+	- *:discovery:*:*:1.0        (optional) IDiscovery services
+	- *:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials
+</pre>
+<p>
+Example:
+</p>
+<pre>type MyMySqlPersistence struct {
+	*persist.IdentifiableJsonMysqlPersistence[MyData, string]
+}
+
+func NewMyMySqlPersistence() *MyMySqlPersistence {
+	c := &amp;MyMySqlPersistence{}
+	c.IdentifiableJsonMysqlPersistence = persist.InheritIdentifiableJsonMysqlPersistence[MyData, string](c, &#34;mydata&#34;)
+	return c
+}
+
+func (c *MyMySqlPersistence) DefineSchema() {
+	c.ClearSchema()
+	c.EnsureTable(&#34;&#34;, &#34;&#34;)
+	c.EnsureSchema(&#34;ALTER TABLE `&#34; + c.TableName + &#34;` ADD `data_key` VARCHAR(50) AS (JSON_UNQUOTE(`data`-&gt;\&#34;$.key\&#34;))&#34;)
+	c.EnsureIndex(c.TableName+&#34;_json_key&#34;, map[string]string{&#34;data_key&#34;: &#34;1&#34;}, map[string]string{&#34;unique&#34;: &#34;true&#34;})
+}
+
+func (c *MyMySqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
+	filter cdata.FilterParams, paging cdata.PagingParams) (page cdata.DataPage[MyData], err error) {
+
+	key, ok := filter.GetAsNullableString(&#34;Key&#34;)
+	filterObj := &#34;&#34;
+	if ok &amp;&amp; key != &#34;&#34; {
+		filterObj += &#34;data-&gt;&#39;$.key&#39;=&#39;&#34; + key + &#34;&#39;&#34;
+	}
+
+	return c.IdentifiableJsonMysqlPersistence.GetPageByFilter(ctx, correlationId,
+		filterObj, paging,
+		&#34;&#34;, &#34;&#34;,
+	)
+}
+
+func main() {
+	persistence := NewMyMySqlPersistence()
+	persistence.Configure(context.Background(), cconf.NewConfigParamsFromTuples(
+		&#34;host&#34;, &#34;localhost&#34;,
+		&#34;port&#34;, 27017,
+	))
+	err := persitence.Open(context.Background(), &#34;123&#34;)
+
+	item, err := persistence.Create(context.Background(), &#34;123&#34;, Mydata{Id: &#34;1&#34;, Name: &#34;ABC&#34;})
+	page, err := persistence.GetPageByFilter(&#34;123&#34;, *NewFilterParamsFromTuples(&#34;name&#34;, &#34;ABC&#34;), nil)
+
+	fmt.Println(page.data) // Result: { id: &#34;1&#34;, name: &#34;ABC&#34; }
+
+	res, err := persistence.DeleteById(context.Background(),&#34;123&#34;, &#34;1&#34;)
+}
+</pre>
+
+			<pre>type IdentifiableJsonMysqlPersistence[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>, K <a href="http://localhost:6060/pkg/builtin/#any">any</a>] struct {
+    *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="InheritIdentifiableJsonMysqlPersistence">func <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=4371:4528#L94">InheritIdentifiableJsonMysqlPersistence</a>
+					<a class="permalink" href="index.html#InheritIdentifiableJsonMysqlPersistence">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func InheritIdentifiableJsonMysqlPersistence[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>, K <a href="http://localhost:6060/pkg/builtin/#any">any</a>](overrides <a href="index.html#IMysqlPersistenceOverrides">IMysqlPersistenceOverrides</a>[T], tableName <a href="http://localhost:6060/pkg/builtin/#string">string</a>) *<a href="index.html#IdentifiableJsonMysqlPersistence">IdentifiableJsonMysqlPersistence</a>[T, K]</pre>
+				<p>
+InheritIdentifiableJsonMysqlPersistence creates a new instance of the persistence component.
+</p>
+<pre>Parameters:
+	- overrides References to override virtual methods
+	- tableName    (optional) a table name.
+</pre>
+
+				
+				
+			
+
+			
+				
+				<h3 id="IdentifiableJsonMysqlPersistence.ConvertFromPublic">func (*IdentifiableJsonMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=6837:6936#L168">ConvertFromPublic</a>
+					<a class="permalink" href="index.html#IdentifiableJsonMysqlPersistence.ConvertFromPublic">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableJsonMysqlPersistence">IdentifiableJsonMysqlPersistence</a>[T, K]) ConvertFromPublic(value T) (map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ConvertFromPublic convert object value from public to internal format.
+</p>
+<pre>	Parameters:
+   - value     an object in public format to convert.
+</pre>
+<p>
+Returns converted object in internal format.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableJsonMysqlPersistence.ConvertFromPublicPartial">func (*IdentifiableJsonMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=7366:7485#L187">ConvertFromPublicPartial</a>
+					<a class="permalink" href="index.html#IdentifiableJsonMysqlPersistence.ConvertFromPublicPartial">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableJsonMysqlPersistence">IdentifiableJsonMysqlPersistence</a>[T, K]) ConvertFromPublicPartial(value map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>) (map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ConvertFromPublicPartial convert object value from public to internal format.
+</p>
+<pre>Parameters:
+	- value     an object in public format to convert.
+Returns: converted object in internal format.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableJsonMysqlPersistence.ConvertToPublic">func (*IdentifiableJsonMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=5577:5668#L124">ConvertToPublic</a>
+					<a class="permalink" href="index.html#IdentifiableJsonMysqlPersistence.ConvertToPublic">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableJsonMysqlPersistence">IdentifiableJsonMysqlPersistence</a>[T, K]) ConvertToPublic(rows *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#Rows">Rows</a>) (T, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ConvertToPublic converts object value from internal to public format.
+</p>
+<pre>Parameters:
+	- value an object in internal format to convert.
+Returns: converted object in public format.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableJsonMysqlPersistence.EnsureTable">func (*IdentifiableJsonMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=4902:4994#L104">EnsureTable</a>
+					<a class="permalink" href="index.html#IdentifiableJsonMysqlPersistence.EnsureTable">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableJsonMysqlPersistence">IdentifiableJsonMysqlPersistence</a>[T, K]) EnsureTable(idType <a href="http://localhost:6060/pkg/builtin/#string">string</a>, dataType <a href="http://localhost:6060/pkg/builtin/#string">string</a>)</pre>
+				<p>
+EnsureTable Adds DML statement to automatically create JSON(B) table
+</p>
+<pre>	Parameters:
+  - idType type of the id column (default: VARCHAR(32))
+  - dataType type of the data column (default: JSON)
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableJsonMysqlPersistence.UpdatePartially">func (*IdentifiableJsonMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableJsonMysqlPersistence.go?s=8137:8298#L206">UpdatePartially</a>
+					<a class="permalink" href="index.html#IdentifiableJsonMysqlPersistence.UpdatePartially">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableJsonMysqlPersistence">IdentifiableJsonMysqlPersistence</a>[T, K]) UpdatePartially(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    id K, data <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/">cdata</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/#AnyValueMap">AnyValueMap</a>) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+UpdatePartially updates only few selected fields in a data item.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- id                an id of data item to be updated.
+	- data              a map with fields to be updated.
+</pre>
+<p>
+Returns: receives updated item or error.
+</p>
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="IdentifiableMysqlPersistence">type <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=4068:4150#L86">IdentifiableMysqlPersistence</a>
+				<a class="permalink" href="index.html#IdentifiableMysqlPersistence">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+IdentifiableMysqlPersistence Abstract persistence component that stores data in MySQL
+and implements a number of CRUD operations over data items with unique ids.
+The data items must implement IIdentifiable interface.
+</p>
+<p>
+In basic scenarios child classes shall only override getPageByFilter,
+getListByFilter or deleteByFilter operations with specific filter function.
+All other operations can be used out of the box.
+</p>
+<p>
+In complex scenarios child classes can implement additional operations by
+accessing c._collection and c._model properties.
+</p>
+<pre>Configuration parameters
+	- collection:               (optional) MySQL collection name
+	- connection(s):
+		- discovery_key:        (optional) a key to retrieve the connection from IDiscovery
+		- host:                 host name or IP address
+		- port:                 port number (default: 27017)
+		- uri:                  resource URI or connection string with all parameters in it
+	- credential(s):
+		- store_key:            (optional) a key to retrieve the credentials from ICredentialStore
+		- username:             (optional) user name
+		- password:             (optional) user password
+	- options:
+		- connect_timeout:      (optional) number of milliseconds to wait before timing out when connecting a new client (default: 0)
+		- idle_timeout:         (optional) number of milliseconds a client must sit idle in the pool and not be checked out (default: 10000)
+		- max_pool_size:        (optional) maximum number of clients the pool should contain (default: 10)
+
+References
+	- *:logger:*:*:1.0           (optional) ILogger components to pass log messages components to pass log messages
+	- *:discovery:*:*:1.0        (optional) IDiscovery services
+	- *:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials
+</pre>
+<p>
+Example:
+</p>
+<pre>type MyMySqlPersistence struct {
+	*persist.IdentifiableMysqlPersistence[MyData, string]
+}
+
+func NewMyMySqlPersistence() *MyMySqlPersistence {
+	c := &amp;MyMySqlPersistence{}
+	c.IdentifiableMysqlPersistence = persist.InheritIdentifiableMysqlPersistence[MyData, string](c, &#34;mydata&#34;)
+	return c
+}
+
+func (c *MyMySqlPersistence) DefineSchema() {
+	c.ClearSchema()
+	c.IdentifiableMysqlPersistence.DefineSchema()
+	// Row name must be in double quotes for properly case!!!
+	c.EnsureSchema(&#34;CREATE TABLE `&#34; + c.TableName + &#34;` (id VARCHAR(32) PRIMARY KEY, `key` VARCHAR(50), `content` TEXT)&#34;)
+	c.EnsureIndex(c.IdentifiableMysqlPersistence.TableName+&#34;_key&#34;, map[string]string{&#34;key&#34;: &#34;1&#34;}, map[string]string{&#34;unique&#34;: &#34;true&#34;})
+}
+
+func (c *MyMySqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
+	filter cdata.FilterParams, paging cdata.PagingParams) (page cdata.DataPage[MyData], err error) {
+
+	key, ok := filter.GetAsNullableString(&#34;Key&#34;)
+	filterObj := &#34;&#34;
+	if ok &amp;&amp; key != &#34;&#34; {
+		filterObj += &#34;`key`=&#39;&#34; + key + &#34;&#39;&#34;
+	}
+	sorting := &#34;&#34;
+
+	return c.IdentifiableMysqlPersistence.GetPageByFilter(ctx, correlationId,
+		filterObj, paging,
+		sorting, &#34;&#34;,
+	)
+}
+
+func main() {
+	persistence := NewMyMySqlPersistence()
+
+	persistence.Configure(context.Background(), NewConfigParamsFromTuples(
+		&#34;host&#34;, &#34;localhost&#34;,
+		&#34;port&#34;, 27017,
+	))
+
+	err := persistence.Open(context.Background(), &#34;123&#34;)
+
+	item, err := persistence.Create(context.Background(), &#34;123&#34;, MyData{Id: &#34;1&#34;, Name: &#34;ABC&#34;})
+	page, err := persistence.GetPageByFilter(context.Background(), &#34;123&#34;, *NewFilterParamsFromTuples(&#34;name&#34;, &#34;ABC&#34;), nil)
+
+	fmt.Println(page.Data)
+	res, err := persistence.DeleteById(context.Background(), &#34;123&#34;, &#34;1&#34;)
+}
+</pre>
+
+			<pre>type IdentifiableMysqlPersistence[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>, K <a href="http://localhost:6060/pkg/builtin/#any">any</a>] struct {
+    *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="InheritIdentifiableMysqlPersistence">func <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=4391:4540#L95">InheritIdentifiableMysqlPersistence</a>
+					<a class="permalink" href="index.html#InheritIdentifiableMysqlPersistence">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func InheritIdentifiableMysqlPersistence[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>, K <a href="http://localhost:6060/pkg/builtin/#any">any</a>](overrides <a href="index.html#IMysqlPersistenceOverrides">IMysqlPersistenceOverrides</a>[T], tableName <a href="http://localhost:6060/pkg/builtin/#string">string</a>) *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]</pre>
+				<p>
+InheritIdentifiableMysqlPersistence creates a new instance of the persistence component.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- overrides References to override virtual methods
+	- tableName    (optional) a table name.
+</pre>
+
+				
+				
+			
+
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.Create">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=7095:7219#L181">Create</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.Create">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) Create(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, item T) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Create a data item.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- item              an item to be created.
+Returns: (optional)  created item or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.DeleteById">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=12225:12351#L341">DeleteById</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.DeleteById">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) DeleteById(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, id K) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+DeleteById deletes a data item by its unique id.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- id                an id of the item to be deleted
+Returns: (optional)  deleted item or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.DeleteByIds">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=13355:13469#L377">DeleteByIds</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.DeleteByIds">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) DeleteByIds(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, ids []K) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+DeleteByIds deletes multiple data items by their unique ids.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- ids                of data items to be deleted.
+Returns: (optional)  error or null for success.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.GetListByIds">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=5033:5167#L112">GetListByIds</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.GetListByIds">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) GetListByIds(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    ids []K) (items []T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+GetListByIds gets a list of data items retrieved by given unique ids.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- ids of data items to be retrieved
+Returns: a data list or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.GetOneById">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=6202:6326#L153">GetOneById</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.GetOneById">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) GetOneById(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, id K) (item T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+GetOneById gets a data item by its unique id.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- id                an id of data item to be retrieved.
+</pre>
+<p>
+Returns: data item or error.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.Set">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=7704:7825#L195">Set</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.Set">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) Set(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, item T) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Set a data item. If the data item exists it updates it,
+otherwise it creates a new data item.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- item              an item to be set.
+Returns: (optional)  updated item or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.Update">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=9315:9439#L250">Update</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.Update">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) Update(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, item T) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Update a data item.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- item              an item to be updated.
+Returns          (optional)  updated item or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="IdentifiableMysqlPersistence.UpdatePartially">func (*IdentifiableMysqlPersistence[T, K]) <a href="http://localhost:6060/src/persistence/IdentifiableMysqlPersistence.go?s=10799:10954#L297">UpdatePartially</a>
+					<a class="permalink" href="index.html#IdentifiableMysqlPersistence.UpdatePartially">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#IdentifiableMysqlPersistence">IdentifiableMysqlPersistence</a>[T, K]) UpdatePartially(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, id K, data <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/">cdata</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/#AnyValueMap">AnyValueMap</a>) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+UpdatePartially updates only few selected fields in a data item.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- id                an id of data item to be updated.
+	- data              a map with fields to be updated.
+Returns: updated item or error.
+</pre>
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="MysqlPersistence">type <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=5717:6849#L150">MysqlPersistence</a>
+				<a class="permalink" href="index.html#MysqlPersistence">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MysqlPersistence Abstract persistence component that stores data in MySql using plain driver.
+</p>
+<p>
+This is the most basic persistence component that is only
+able to store data items of any type. Specific CRUD operations
+over the data items must be implemented in child classes by
+accessing c._db or c.collection properties.
+</p>
+<pre>Configuration parameters
+	- collection:                  (optional) MySql collection name
+	- schema:                  	   (optional) MySql schema, default &#34;public&#34;
+	- connection(s):
+		- discovery_key:             (optional) a key to retrieve the connection from IDiscovery
+		- host:                      host name or IP address
+		- port:                      port number (default: 27017)
+		- uri:                       resource URI or connection string with all parameters in it
+	- credential(s):
+		- store_key:                 (optional) a key to retrieve the credentials from ICredentialStore
+		- username:                  (optional) user name
+		- password:                  (optional) user password
+	- options:
+		- connect_timeout:      (optional) number of milliseconds to wait before timing out when connecting a new client (default: 0)
+		- idle_timeout:         (optional) number of milliseconds a client must sit idle in the pool and not be checked out (default: 10000)
+		- max_pool_size:        (optional) maximum number of clients the pool should contain (default: 10)
+
+References:
+	- *:logger:*:*:1.0           (optional) ILogger components to pass log messages
+	- *:discovery:*:*:1.0        (optional) IDiscovery services
+	- *:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials
+</pre>
+<p>
+Example:
+</p>
+<pre>import (
+	&#34;context&#34;
+	&#34;fmt&#34;
+
+	cconf &#34;github.com/pip-services3-gox/pip-services3-commons-gox/config&#34;
+	cpersist &#34;github.com/pip-services3-gox/pip-services3-data-gox/persistence&#34;
+	persist &#34;github.com/pip-services3-gox/pip-services3-mysql-gox/persistence&#34;
+	&#34;github.com/pip-services3-gox/pip-services3-mysql-gox/test/fixtures&#34;
+)
+
+type MyMySqlPersistence struct {
+	*persist.MysqlPersistence[fixtures.Dummy]
+}
+
+func NewMyMySqlPersistence() *MyMySqlPersistence {
+	c := &amp;MyMySqlPersistence{}
+	c.MysqlPersistence = persist.InheritMysqlPersistence[fixtures.Dummy](c, &#34;mydata&#34;)
+	return c
+}
+
+func (c *MyMySqlPersistence) GetOneByName(ctx context.Context, correlationId string, name string) (item fixtures.Dummy, err error) {
+
+	query := &#34;SELECT * FROM &#34; + c.QuotedTableName() + &#34; WHERE name=?&#34;
+
+	rows, err := c.Client.QueryContext(ctx, query, name)
+	if err != nil {
+		return item, err
+	}
+	defer rows.Close()
+
+	if !rows.Next() {
+		return item, rows.Err()
+	}
+
+	if err == nil {
+		return c.Overrides.ConvertToPublic(rows)
+	}
+	return item, err
+}
+
+func (c *MyMySqlPersistence) Set(ctx context.Context, correlationId string, item fixtures.Dummy) (result fixtures.Dummy, err error) {
+	objMap, convErr := c.Overrides.ConvertFromPublic(item)
+	if convErr != nil {
+		return result, convErr
+	}
+
+	columns, values := c.GenerateColumnsAndValues(objMap)
+
+	paramsStr := c.GenerateParameters(len(values))
+	columnsStr := c.GenerateColumns(columns)
+	setParams := c.GenerateSetParameters(columns)
+	id := cpersist.GetObjectId(objMap)
+
+	values = append(values, values...)
+
+	query := &#34;INSERT INTO &#34; + c.QuotedTableName() + &#34; (&#34; + columnsStr + &#34;) VALUES (&#34; + paramsStr + &#34;)&#34;
+	query += &#34; ON DUPLICATE KEY UPDATE &#34; + setParams
+
+	_, err = c.Client.ExecContext(ctx, query, values...)
+	if err != nil {
+		return result, err
+	}
+
+	// Getting result
+	query = &#34;SELECT * FROM &#34; + c.QuotedTableName() + &#34; WHERE id=?&#34;
+	rows, err := c.Client.QueryContext(ctx, query, []any{id}...)
+	if err != nil {
+		return result, err
+	}
+	defer rows.Close()
+
+	if !rows.Next() {
+		return result, rows.Err()
+	}
+
+	if err == nil {
+		result, convErr = c.Overrides.ConvertToPublic(rows)
+		if convErr != nil {
+			return result, convErr
+		}
+		return result, nil
+	}
+	return result, rows.Err()
+
+}
+
+func main() {
+	persistence := NewMyMySqlPersistence()
+	persistence.Configure(context.Background(), cconf.NewConfigParamsFromTuples(
+		&#34;host&#34;, &#34;localhost&#34;,
+		&#34;port&#34;, 27017,
+	))
+
+	err := persistence.Open(context.Background(), &#34;123&#34;)
+
+	res, err := persistence.Set(context.Background(), &#34;123&#34;, MyData{Id: &#34;1&#34;, Name: &#34;ABC&#34;})
+	item, err := persistence.GetOneByName(context.Background(), &#34;123&#34;, &#34;ABC&#34;)
+	fmt.Println(item) // Result: { Id: &#34;1&#34;, Name: &#34;ABC&#34; }
+}
+</pre>
+
+			<pre>type MysqlPersistence[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>] struct {
+<span id="MysqlPersistence.Overrides"></span>    Overrides <a href="index.html#IMysqlPersistenceOverrides">IMysqlPersistenceOverrides</a>[T]
+    <span class="comment">// Defines general JSON convertors</span>
+<span id="MysqlPersistence.JsonConvertor"></span>    JsonConvertor    <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/convert/">cconv</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/convert/#IJSONEngine">IJSONEngine</a>[T]
+<span id="MysqlPersistence.JsonMapConvertor"></span>    JsonMapConvertor <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/convert/">cconv</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/convert/#IJSONEngine">IJSONEngine</a>[map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>]
+
+    <span class="comment">//The dependency resolver.</span>
+<span id="MysqlPersistence.DependencyResolver"></span>    DependencyResolver *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">cref</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#DependencyResolver">DependencyResolver</a>
+    <span class="comment">//The logger.</span>
+<span id="MysqlPersistence.Logger"></span>    Logger *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/">clog</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/#CompositeLogger">CompositeLogger</a>
+    <span class="comment">//The MySql connection component.</span>
+<span id="MysqlPersistence.Connection"></span>    Connection *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-mysql-gox/connect/">conn</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-mysql-gox/connect/#MysqlConnection">MysqlConnection</a>
+    <span class="comment">//The MySql connection pool object.</span>
+<span id="MysqlPersistence.Client"></span>    Client *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#DB">DB</a>
+    <span class="comment">//The MySql database name.</span>
+<span id="MysqlPersistence.DatabaseName"></span>    DatabaseName <a href="http://localhost:6060/pkg/builtin/#string">string</a>
+    <span class="comment">//The MySql database schema name. If not set use &#34;public&#34; by default</span>
+<span id="MysqlPersistence.SchemaName"></span>    SchemaName <a href="http://localhost:6060/pkg/builtin/#string">string</a>
+    <span class="comment">//The MySql table object.</span>
+<span id="MysqlPersistence.TableName"></span>    TableName   <a href="http://localhost:6060/pkg/builtin/#string">string</a>
+<span id="MysqlPersistence.MaxPageSize"></span>    MaxPageSize <a href="http://localhost:6060/pkg/builtin/#int">int</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="InheritMysqlPersistence">func <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=7078:7193#L192">InheritMysqlPersistence</a>
+					<a class="permalink" href="index.html#InheritMysqlPersistence">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func InheritMysqlPersistence[T <a href="http://localhost:6060/pkg/builtin/#any">any</a>](overrides <a href="index.html#IMysqlPersistenceOverrides">IMysqlPersistenceOverrides</a>[T], tableName <a href="http://localhost:6060/pkg/builtin/#string">string</a>) *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]</pre>
+				<p>
+InheritMysqlPersistence creates a new instance of the persistence component.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- overrides References to override virtual methods
+	- tableName    (optional) a table name.
+</pre>
+
+				
+				
+			
+
+			
+				
+				<h3 id="MysqlPersistence.Clear">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=17203:17287#L541">Clear</a>
+					<a class="permalink" href="index.html#MysqlPersistence.Clear">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) Clear(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+Clear component state.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId 	(optional) transaction id to trace execution through call chain.
+Returns: error or nil no errors occured.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.ClearSchema">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=11342:11385#L334">ClearSchema</a>
+					<a class="permalink" href="index.html#MysqlPersistence.ClearSchema">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) ClearSchema()</pre>
+				<p>
+ClearSchema clears all auto-created objects
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.Close">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=16503:16593#L513">Close</a>
+					<a class="permalink" href="index.html#MysqlPersistence.Close">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Close component and frees used resources.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId (optional) transaction id to trace execution through call chain.
+Returns: error or nil no errors occurred.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.Configure">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=8224:8312#L224">Configure</a>
+					<a class="permalink" href="index.html#MysqlPersistence.Configure">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) Configure(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, config *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>)</pre>
+				<p>
+Configure component by passing configuration parameters.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- config configuration parameters to be set.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.ConvertFromPublic">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=13059:13139#L392">ConvertFromPublic</a>
+					<a class="permalink" href="index.html#MysqlPersistence.ConvertFromPublic">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) ConvertFromPublic(value T) (map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ConvertFromPublic сonvert object value from func (c * MysqlPersistence) to internal format.
+</p>
+<pre>Parameters:
+	- value an object in func (c * MysqlPersistence) format to convert.
+Returns: converted object in internal format.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.ConvertFromPublicPartial">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=13545:13645#L407">ConvertFromPublicPartial</a>
+					<a class="permalink" href="index.html#MysqlPersistence.ConvertFromPublicPartial">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) ConvertFromPublicPartial(value map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>) (map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ConvertFromPublicPartial converts the given object from the public partial format.
+</p>
+<pre>Parameters:
+	- value the object to convert from the public partial format.
+Returns: the initial object.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.ConvertToPublic">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=11662:11734#L342">ConvertToPublic</a>
+					<a class="permalink" href="index.html#MysqlPersistence.ConvertToPublic">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) ConvertToPublic(rows *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#Rows">Rows</a>) (T, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ConvertToPublic converts object value from internal to func (c * MysqlPersistence) format.
+</p>
+<pre>Parameters:
+	- value an object in internal format to convert.
+Returns: converted object in func (c * MysqlPersistence) format.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.Create">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=29269:29378#L949">Create</a>
+					<a class="permalink" href="index.html#MysqlPersistence.Create">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) Create(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, item T) (result T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Create creates a data item.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlation_id    (optional) transaction id to trace execution through call chain.
+	- item              an item to be created.
+Returns: (optional) callback function that receives created item or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.CreateSchema">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=17670:17767#L557">CreateSchema</a>
+					<a class="permalink" href="index.html#MysqlPersistence.CreateSchema">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) CreateSchema(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.DefineSchema">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=10948:10992#L322">DefineSchema</a>
+					<a class="permalink" href="index.html#MysqlPersistence.DefineSchema">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) DefineSchema()</pre>
+				<p>
+DefineSchema a database schema for this persistence, have to call in child class
+Override in child classes
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.DeleteByFilter">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=30489:30597#L981">DeleteByFilter</a>
+					<a class="permalink" href="index.html#MysqlPersistence.DeleteByFilter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) DeleteByFilter(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, filter <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+DeleteByFilter deletes data items that match to a given filter.
+This method shall be called by a func (c * MysqlPersistence) deleteByFilter method from child class that
+receives FilterParams and converts them into a filter function.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- filter            (optional) a filter JSON object.
+Returns: error or nil for success.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.EnsureIndex">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=10053:10158#L281">EnsureIndex</a>
+					<a class="permalink" href="index.html#MysqlPersistence.EnsureIndex">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) EnsureIndex(name <a href="http://localhost:6060/pkg/builtin/#string">string</a>, keys map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#string">string</a>, options map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#string">string</a>)</pre>
+				<p>
+EnsureIndex adds index definition to create it on opening
+</p>
+<pre>Parameters:
+	- keys index keys (fields)
+	- options index options
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.EnsureSchema">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=11152:11218#L329">EnsureSchema</a>
+					<a class="permalink" href="index.html#MysqlPersistence.EnsureSchema">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) EnsureSchema(schemaStatement <a href="http://localhost:6060/pkg/builtin/#string">string</a>)</pre>
+				<p>
+EnsureSchema adds a statement to schema definition
+</p>
+<pre>	Parameters:
+  - schemaStatement a statement to be added to the schema
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GenerateColumns">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=19832:19902#L639">GenerateColumns</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GenerateColumns">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GenerateColumns(columns []<a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
+				<p>
+GenerateColumns generates a list of column names to use in SQL statements like: &#34;column1,column2,column3&#34;
+</p>
+<pre>Parameters:
+	- columns an array with column values
+Returns: a generated list of column names
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GenerateColumnsAndValues">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=21537:21632#L700">GenerateColumnsAndValues</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GenerateColumnsAndValues">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GenerateColumnsAndValues(objMap map[<a href="http://localhost:6060/pkg/builtin/#string">string</a>]<a href="http://localhost:6060/pkg/builtin/#any">any</a>) ([]<a href="http://localhost:6060/pkg/builtin/#string">string</a>, []<a href="http://localhost:6060/pkg/builtin/#any">any</a>)</pre>
+				<p>
+GenerateColumnsAndValues generates a list of column parameters
+</p>
+<pre>Parameters:
+	- values an array with column values or a key-value map
+Returns: a generated list of column values
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GenerateParameters">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=20390:20462#L659">GenerateParameters</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GenerateParameters">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GenerateParameters(valuesCount <a href="http://localhost:6060/pkg/builtin/#int">int</a>) <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
+				<p>
+GenerateParameters generates a list of value parameters to use in SQL statements like: &#34;?,?,?&#34;
+</p>
+<pre>Parameters:
+	- values an array with column values or a key-value map
+Returns: a generated list of value parameters
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GenerateSetParameters">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=20954:21030#L679">GenerateSetParameters</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GenerateSetParameters">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GenerateSetParameters(columns []<a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
+				<p>
+GenerateSetParameters generates a list of column sets to use in UPDATE statements like: column1=?,column2=?
+</p>
+<pre>Parameters:
+	- values an array with column values or a key-value map
+Returns: a generated list of column sets
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GetCountByFilter">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=24754:24875#L797">GetCountByFilter</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GetCountByFilter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GetCountByFilter(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    filter <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (<a href="http://localhost:6060/pkg/builtin/#int64">int64</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+GetCountByFilter gets a number of data items retrieved by a given filter.
+This method shall be called by a func (c * MysqlPersistence) getCountByFilter method from child class that
+receives FilterParams and converts them into a filter function.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- filter            (optional) a filter JSON object
+Returns: data page or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GetListByFilter">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=26247:26406#L845">GetListByFilter</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GetListByFilter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GetListByFilter(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    filter <a href="http://localhost:6060/pkg/builtin/#string">string</a>, sort <a href="http://localhost:6060/pkg/builtin/#string">string</a>, selection <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (items []T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+GetListByFilter gets a list of data items retrieved by a given filter and sorted according to sort parameters.
+This method shall be called by a func (c * MysqlPersistence) getListByFilter method from child class that
+receives FilterParams and converts them into a filter function.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId    (optional) transaction id to trace execution through call chain.
+	- filter           (optional) a filter JSON object
+	- paging           (optional) paging parameters
+	- sort             (optional) sorting JSON object
+	- select           (optional) projection JSON object
+Returns: data list or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GetOneRandom">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=27749:27869#L898">GetOneRandom</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GetOneRandom">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GetOneRandom(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>, filter <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (item T, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+GetOneRandom gets a random item from items that match to a given filter.
+This method shall be called by a func (c * MysqlPersistence) getOneRandom method from child class that
+receives FilterParams and converts them into a filter function.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- filter            (optional) a filter JSON object
+Returns: random item or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.GetPageByFilter">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=22604:22803#L726">GetPageByFilter</a>
+					<a class="permalink" href="index.html#MysqlPersistence.GetPageByFilter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) GetPageByFilter(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    filter <a href="http://localhost:6060/pkg/builtin/#string">string</a>, paging <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/">cdata</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/#PagingParams">PagingParams</a>, sort <a href="http://localhost:6060/pkg/builtin/#string">string</a>, selection <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (page <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/">cdata</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/data/#DataPage">DataPage</a>[T], err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+GetPageByFilter gets a page of data items retrieved by a given filter and sorted according to sort parameters.
+This method shall be called by a func (c * MysqlPersistence) getPageByFilter method from child class that
+receives FilterParams and converts them into a filter function.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId     (optional) transaction id to trace execution through call chain.
+	- filter            (optional) a filter JSON object
+	- paging            (optional) paging parameters
+	- sort              (optional) sorting JSON object
+	- select            (optional) projection JSON object
+Returns: receives a data page or error.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.IsOpen">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=14444:14487#L437">IsOpen</a>
+					<a class="permalink" href="index.html#MysqlPersistence.IsOpen">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
+				<p>
+IsOpen checks if the component is opened.
+</p>
+<pre>Returns: true if the component has been opened and false otherwise.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.IsTerminated">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=14655:14704#L443">IsTerminated</a>
+					<a class="permalink" href="index.html#MysqlPersistence.IsTerminated">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) IsTerminated() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
+				<p>
+IsTerminated checks if the wee need to terminate process before close component.
+</p>
+<pre>Returns: true if you need terminate your processes.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.Open">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=15036:15125#L460">Open</a>
+					<a class="permalink" href="index.html#MysqlPersistence.Open">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Open the component.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId (optional) transaction id to trace execution through call chain.
+Returns: error or nil no errors occurred.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.QuoteIdentifier">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=13846:13912#L417">QuoteIdentifier</a>
+					<a class="permalink" href="index.html#MysqlPersistence.QuoteIdentifier">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) QuoteIdentifier(value <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.QuotedTableName">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=14109:14163#L428">QuotedTableName</a>
+					<a class="permalink" href="index.html#MysqlPersistence.QuotedTableName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) QuotedTableName() <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
+				<p>
+QuotedTableName return quoted SchemaName with TableName (&#34;schema&#34;.&#34;table&#34;)
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.SetReferences">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=8892:8985#L240">SetReferences</a>
+					<a class="permalink" href="index.html#MysqlPersistence.SetReferences">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) SetReferences(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, references <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">cref</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>)</pre>
+				<p>
+SetReferences to dependent components.
+</p>
+<pre>Parameters:
+	- ctx context.Context
+	- references references to locate the component dependencies.
+</pre>
+
+				
+				
+				
+			
+				
+				<h3 id="MysqlPersistence.UnsetReferences">func (*MysqlPersistence[T]) <a href="http://localhost:6060/src/persistence/MysqlPersistence.go?s=9533:9580#L262">UnsetReferences</a>
+					<a class="permalink" href="index.html#MysqlPersistence.UnsetReferences">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#MysqlPersistence">MysqlPersistence</a>[T]) UnsetReferences()</pre>
+				<p>
+UnsetReferences (clears) previously set references to dependent components.
+</p>
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.18.7.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:6060/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>
