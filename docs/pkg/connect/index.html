@@ -115,49 +115,49 @@
 			
 			
 				
-				<dd><a href="index.html#MysqlConnection">type MysqlConnection</a></dd>
+				<dd><a href="index.html#MySqlConnection">type MySqlConnection</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#NewMysqlConnection">func NewMysqlConnection() *MysqlConnection</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#NewMySqlConnection">func NewMySqlConnection() *MySqlConnection</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.Close">func (c *MysqlConnection) Close(ctx context.Context, correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.Close">func (c *MySqlConnection) Close(ctx context.Context, correlationId string) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.Configure">func (c *MysqlConnection) Configure(ctx context.Context, config *cconf.ConfigParams)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.Configure">func (c *MySqlConnection) Configure(ctx context.Context, config *cconf.ConfigParams)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.GetConnection">func (c *MysqlConnection) GetConnection() *sql.DB</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.GetConnection">func (c *MySqlConnection) GetConnection() *sql.DB</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.GetDatabaseName">func (c *MysqlConnection) GetDatabaseName() string</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.GetDatabaseName">func (c *MySqlConnection) GetDatabaseName() string</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.IsOpen">func (c *MysqlConnection) IsOpen() bool</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.IsOpen">func (c *MySqlConnection) IsOpen() bool</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.Open">func (c *MysqlConnection) Open(ctx context.Context, correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.Open">func (c *MySqlConnection) Open(ctx context.Context, correlationId string) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnection.SetReferences">func (c *MysqlConnection) SetReferences(ctx context.Context, references cref.IReferences)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnection.SetReferences">func (c *MySqlConnection) SetReferences(ctx context.Context, references cref.IReferences)</a></dd>
 				
 			
 				
-				<dd><a href="index.html#MysqlConnectionResolver">type MysqlConnectionResolver</a></dd>
+				<dd><a href="index.html#MySqlConnectionResolver">type MySqlConnectionResolver</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#NewMysqlConnectionResolver">func NewMysqlConnectionResolver() *MysqlConnectionResolver</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#NewMySqlConnectionResolver">func NewMySqlConnectionResolver() *MySqlConnectionResolver</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnectionResolver.Configure">func (c *MysqlConnectionResolver) Configure(ctx context.Context, config *cconf.ConfigParams)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnectionResolver.Configure">func (c *MySqlConnectionResolver) Configure(ctx context.Context, config *cconf.ConfigParams)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnectionResolver.Resolve">func (c *MysqlConnectionResolver) Resolve(ctx context.Context, correlationId string) (uri string, err error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnectionResolver.Resolve">func (c *MySqlConnectionResolver) Resolve(ctx context.Context, correlationId string) (uri string, err error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MysqlConnectionResolver.SetReferences">func (c *MysqlConnectionResolver) SetReferences(ctx context.Context, references crefer.IReferences)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MySqlConnectionResolver.SetReferences">func (c *MySqlConnectionResolver) SetReferences(ctx context.Context, references crefer.IReferences)</a></dd>
 				
 			
 			
@@ -200,8 +200,8 @@
 		
 			
 			
-			<h2 id="MysqlConnection">type <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=1791:2173#L32">MysqlConnection</a>
-				<a class="permalink" href="index.html#MysqlConnection">&#xb6;</a>
+			<h2 id="MySqlConnection">type <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=1791:2173#L32">MySqlConnection</a>
+				<a class="permalink" href="index.html#MySqlConnection">&#xb6;</a>
 				
 				
 			</h2>
@@ -233,18 +233,18 @@ References
 	- *:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials
 </pre>
 
-			<pre>type MysqlConnection struct {
+			<pre>type MySqlConnection struct {
 
     <span class="comment">// The logger.</span>
-<span id="MysqlConnection.Logger"></span>    Logger *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/">clog</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/#CompositeLogger">CompositeLogger</a>
+<span id="MySqlConnection.Logger"></span>    Logger *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/">clog</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/#CompositeLogger">CompositeLogger</a>
     <span class="comment">// The connection resolver.</span>
-<span id="MysqlConnection.ConnectionResolver"></span>    ConnectionResolver *<a href="index.html#MysqlConnectionResolver">MysqlConnectionResolver</a>
+<span id="MySqlConnection.ConnectionResolver"></span>    ConnectionResolver *<a href="index.html#MySqlConnectionResolver">MySqlConnectionResolver</a>
     <span class="comment">// The configuration options.</span>
-<span id="MysqlConnection.Options"></span>    Options *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>
+<span id="MySqlConnection.Options"></span>    Options *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>
     <span class="comment">// The MySQL connection pool object.</span>
-<span id="MysqlConnection.Connection"></span>    Connection *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#DB">DB</a>
+<span id="MySqlConnection.Connection"></span>    Connection *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#DB">DB</a>
     <span class="comment">// The MySQL database name.</span>
-<span id="MysqlConnection.DatabaseName"></span>    DatabaseName <a href="http://localhost:6060/pkg/builtin/#string">string</a>
+<span id="MySqlConnection.DatabaseName"></span>    DatabaseName <a href="http://localhost:6060/pkg/builtin/#string">string</a>
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -259,14 +259,14 @@ References
 
 			
 				
-				<h3 id="NewMysqlConnection">func <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=2385:2427#L56">NewMysqlConnection</a>
-					<a class="permalink" href="index.html#NewMysqlConnection">&#xb6;</a>
+				<h3 id="NewMySqlConnection">func <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=2385:2427#L56">NewMySqlConnection</a>
+					<a class="permalink" href="index.html#NewMySqlConnection">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewMysqlConnection() *<a href="index.html#MysqlConnection">MysqlConnection</a></pre>
+				<pre>func NewMySqlConnection() *<a href="index.html#MySqlConnection">MySqlConnection</a></pre>
 				<p>
-NewMysqlConnection creates a new instance of the connection component.
+NewMySqlConnection creates a new instance of the connection component.
 </p>
 
 				
@@ -275,12 +275,12 @@ NewMysqlConnection creates a new instance of the connection component.
 
 			
 				
-				<h3 id="MysqlConnection.Close">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=5667:5747#L149">Close</a>
-					<a class="permalink" href="index.html#MysqlConnection.Close">&#xb6;</a>
+				<h3 id="MySqlConnection.Close">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=5667:5747#L149">Close</a>
+					<a class="permalink" href="index.html#MySqlConnection.Close">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
 Close component and frees used resources.
 </p>
@@ -295,12 +295,12 @@ Returns: error or nil no errors occurred
 				
 			
 				
-				<h3 id="MysqlConnection.Configure">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=3038:3122#L75">Configure</a>
-					<a class="permalink" href="index.html#MysqlConnection.Configure">&#xb6;</a>
+				<h3 id="MySqlConnection.Configure">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=3038:3122#L75">Configure</a>
+					<a class="permalink" href="index.html#MySqlConnection.Configure">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) Configure(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, config *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>)</pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) Configure(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, config *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>)</pre>
 				<p>
 Configure component by passing configuration parameters.
 </p>
@@ -314,36 +314,36 @@ Configure component by passing configuration parameters.
 				
 			
 				
-				<h3 id="MysqlConnection.GetConnection">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=5972:6021#L160">GetConnection</a>
-					<a class="permalink" href="index.html#MysqlConnection.GetConnection">&#xb6;</a>
+				<h3 id="MySqlConnection.GetConnection">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=5972:6021#L160">GetConnection</a>
+					<a class="permalink" href="index.html#MySqlConnection.GetConnection">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) GetConnection() *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#DB">DB</a></pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) GetConnection() *<a href="http://localhost:6060/pkg/database/sql/">sql</a>.<a href="http://localhost:6060/pkg/database/sql/#DB">DB</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="MysqlConnection.GetDatabaseName">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=6052:6102#L164">GetDatabaseName</a>
-					<a class="permalink" href="index.html#MysqlConnection.GetDatabaseName">&#xb6;</a>
+				<h3 id="MySqlConnection.GetDatabaseName">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=6052:6102#L164">GetDatabaseName</a>
+					<a class="permalink" href="index.html#MySqlConnection.GetDatabaseName">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) GetDatabaseName() <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) GetDatabaseName() <a href="http://localhost:6060/pkg/builtin/#string">string</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="MysqlConnection.IsOpen">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=3836:3875#L94">IsOpen</a>
-					<a class="permalink" href="index.html#MysqlConnection.IsOpen">&#xb6;</a>
+				<h3 id="MySqlConnection.IsOpen">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=3836:3875#L94">IsOpen</a>
+					<a class="permalink" href="index.html#MySqlConnection.IsOpen">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
 IsOpen checks if the component is opened.
 </p>
@@ -355,12 +355,12 @@ IsOpen checks if the component is opened.
 				
 			
 				
-				<h3 id="MysqlConnection.Open">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=4117:4196#L103">Open</a>
-					<a class="permalink" href="index.html#MysqlConnection.Open">&#xb6;</a>
+				<h3 id="MySqlConnection.Open">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=4117:4196#L103">Open</a>
+					<a class="permalink" href="index.html#MySqlConnection.Open">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
 Open the component.
 Parameters:
@@ -375,12 +375,12 @@ Parameters:
 				
 			
 				
-				<h3 id="MysqlConnection.SetReferences">func (*MysqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=3525:3614#L87">SetReferences</a>
-					<a class="permalink" href="index.html#MysqlConnection.SetReferences">&#xb6;</a>
+				<h3 id="MySqlConnection.SetReferences">func (*MySqlConnection) <a href="http://localhost:6060/src/connect/MysqlConnection.go?s=3525:3614#L87">SetReferences</a>
+					<a class="permalink" href="index.html#MySqlConnection.SetReferences">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnection">MysqlConnection</a>) SetReferences(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, references <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">cref</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>)</pre>
+				<pre>func (c *<a href="index.html#MySqlConnection">MySqlConnection</a>) SetReferences(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, references <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">cref</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>)</pre>
 				<p>
 SetReferences references to dependent components.
 </p>
@@ -396,8 +396,8 @@ SetReferences references to dependent components.
 		
 			
 			
-			<h2 id="MysqlConnectionResolver">type <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=1536:1734#L25">MysqlConnectionResolver</a>
-				<a class="permalink" href="index.html#MysqlConnectionResolver">&#xb6;</a>
+			<h2 id="MySqlConnectionResolver">type <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=1536:1734#L25">MySqlConnectionResolver</a>
+				<a class="permalink" href="index.html#MySqlConnectionResolver">&#xb6;</a>
 				
 				
 			</h2>
@@ -423,11 +423,11 @@ References:
 	- *:credential-store:*:*:1.0      (optional) Credential stores to resolve credentials
 </pre>
 
-			<pre>type MysqlConnectionResolver struct {
+			<pre>type MySqlConnectionResolver struct {
     <span class="comment">// The connections&#39; resolver.</span>
-<span id="MysqlConnectionResolver.ConnectionResolver"></span>    ConnectionResolver *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/connect/">cconn</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/connect/#ConnectionResolver">ConnectionResolver</a>
+<span id="MySqlConnectionResolver.ConnectionResolver"></span>    ConnectionResolver *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/connect/">cconn</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/connect/#ConnectionResolver">ConnectionResolver</a>
     <span class="comment">// The credentials&#39; resolver.</span>
-<span id="MysqlConnectionResolver.CredentialResolver"></span>    CredentialResolver *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/auth/">cauth</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/auth/#CredentialResolver">CredentialResolver</a>
+<span id="MySqlConnectionResolver.CredentialResolver"></span>    CredentialResolver *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/auth/">cauth</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/auth/#CredentialResolver">CredentialResolver</a>
 }
 </pre>
 
@@ -441,16 +441,16 @@ References:
 
 			
 				
-				<h3 id="NewMysqlConnectionResolver">func <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=1839:1897#L34">NewMysqlConnectionResolver</a>
-					<a class="permalink" href="index.html#NewMysqlConnectionResolver">&#xb6;</a>
+				<h3 id="NewMySqlConnectionResolver">func <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=1839:1897#L34">NewMySqlConnectionResolver</a>
+					<a class="permalink" href="index.html#NewMySqlConnectionResolver">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewMysqlConnectionResolver() *<a href="index.html#MysqlConnectionResolver">MysqlConnectionResolver</a></pre>
+				<pre>func NewMySqlConnectionResolver() *<a href="index.html#MySqlConnectionResolver">MySqlConnectionResolver</a></pre>
 				<p>
-NewMysqlConnectionResolver creates new connection resolver
+NewMySqlConnectionResolver creates new connection resolver
 </p>
-<pre>Returns: *MysqlConnectionResolver
+<pre>Returns: *MySqlConnectionResolver
 </pre>
 
 				
@@ -459,12 +459,12 @@ NewMysqlConnectionResolver creates new connection resolver
 
 			
 				
-				<h3 id="MysqlConnectionResolver.Configure">func (*MysqlConnectionResolver) <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=2287:2379#L45">Configure</a>
-					<a class="permalink" href="index.html#MysqlConnectionResolver.Configure">&#xb6;</a>
+				<h3 id="MySqlConnectionResolver.Configure">func (*MySqlConnectionResolver) <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=2287:2379#L45">Configure</a>
+					<a class="permalink" href="index.html#MySqlConnectionResolver.Configure">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnectionResolver">MysqlConnectionResolver</a>) Configure(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, config *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>)</pre>
+				<pre>func (c *<a href="index.html#MySqlConnectionResolver">MySqlConnectionResolver</a>) Configure(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, config *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconf</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>)</pre>
 				<p>
 Configure is configures component by passing configuration parameters.
 </p>
@@ -478,14 +478,14 @@ Configure is configures component by passing configuration parameters.
 				
 			
 				
-				<h3 id="MysqlConnectionResolver.Resolve">func (*MysqlConnectionResolver) <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=6302:6410#L189">Resolve</a>
-					<a class="permalink" href="index.html#MysqlConnectionResolver.Resolve">&#xb6;</a>
+				<h3 id="MySqlConnectionResolver.Resolve">func (*MySqlConnectionResolver) <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=6302:6410#L189">Resolve</a>
+					<a class="permalink" href="index.html#MySqlConnectionResolver.Resolve">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnectionResolver">MysqlConnectionResolver</a>) Resolve(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (uri <a href="http://localhost:6060/pkg/builtin/#string">string</a>, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#MySqlConnectionResolver">MySqlConnectionResolver</a>) Resolve(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) (uri <a href="http://localhost:6060/pkg/builtin/#string">string</a>, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Resolve method are resolves Mysql connection URI from connection and credential parameters.
+Resolve method are resolves MySql connection URI from connection and credential parameters.
 </p>
 <pre>Parameters:
 	- ctx context.Context
@@ -498,12 +498,12 @@ Returns: uri string, err error resolved URI and error, if this occured.
 				
 			
 				
-				<h3 id="MysqlConnectionResolver.SetReferences">func (*MysqlConnectionResolver) <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=2671:2770#L54">SetReferences</a>
-					<a class="permalink" href="index.html#MysqlConnectionResolver.SetReferences">&#xb6;</a>
+				<h3 id="MySqlConnectionResolver.SetReferences">func (*MySqlConnectionResolver) <a href="http://localhost:6060/src/connect/MysqlConnectionResolver.go?s=2671:2770#L54">SetReferences</a>
+					<a class="permalink" href="index.html#MySqlConnectionResolver.SetReferences">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#MysqlConnectionResolver">MysqlConnectionResolver</a>) SetReferences(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, references <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>)</pre>
+				<pre>func (c *<a href="index.html#MySqlConnectionResolver">MySqlConnectionResolver</a>) SetReferences(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, references <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>)</pre>
 				<p>
 SetReferences is sets references to dependent components.
 Parameters:

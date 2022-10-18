@@ -39,12 +39,12 @@ import (
 //		- *:logger:*:*:1.0           (optional) ILogger components to pass log messages
 //		- *:discovery:*:*:1.0        (optional) IDiscovery services
 //		- *:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials
-type MysqlConnection struct {
+type MySqlConnection struct {
 	defaultConfig *cconf.ConfigParams
 	// The logger.
 	Logger *clog.CompositeLogger
 	// The connection resolver.
-	ConnectionResolver *MysqlConnectionResolver
+	ConnectionResolver *MySqlConnectionResolver
 	// The configuration options.
 	Options *cconf.ConfigParams
 	// The MySQL connection pool object.
@@ -62,16 +62,16 @@ const (
 	DefaultRetriesCount   = 3
 )
 
-// NewMysqlConnection creates a new instance of the connection component.
-func NewMysqlConnection() *MysqlConnection {
-	c := &MysqlConnection{
+// NewMySqlConnection creates a new instance of the connection component.
+func NewMySqlConnection() *MySqlConnection {
+	c := &MySqlConnection{
 		defaultConfig: cconf.NewConfigParamsFromTuples(
 			"options.connect_timeout", DefaultConnectTimeout,
 			"options.idle_timeout", DefaultIdleTimeout,
 			"options.max_pool_size", DefaultMaxPoolSize,
 		),
 		Logger:             clog.NewCompositeLogger(),
-		ConnectionResolver: NewMysqlConnectionResolver(),
+		ConnectionResolver: NewMySqlConnectionResolver(),
 		Options:            cconf.NewEmptyConfigParams(),
 		retries:            DefaultRetriesCount,
 	}
@@ -82,7 +82,7 @@ func NewMysqlConnection() *MysqlConnection {
 //	Parameters:
 //		- ctx context.Context
 //		- config configuration parameters to be set.
-func (c *MysqlConnection) Configure(ctx context.Context, config *cconf.ConfigParams) {
+func (c *MySqlConnection) Configure(ctx context.Context, config *cconf.ConfigParams) {
 	config = config.SetDefaults(c.defaultConfig)
 	c.ConnectionResolver.Configure(ctx, config)
 	c.Options = c.Options.Override(config.GetSection("options"))
@@ -94,14 +94,14 @@ func (c *MysqlConnection) Configure(ctx context.Context, config *cconf.ConfigPar
 //	Parameters:
 //		- ctx context.Context
 //		- references references to locate the component dependencies.
-func (c *MysqlConnection) SetReferences(ctx context.Context, references cref.IReferences) {
+func (c *MySqlConnection) SetReferences(ctx context.Context, references cref.IReferences) {
 	c.Logger.SetReferences(ctx, references)
 	c.ConnectionResolver.SetReferences(ctx, references)
 }
 
 // IsOpen checks if the component is opened.
 //	Returns true if the component has been opened and false otherwise.
-func (c *MysqlConnection) IsOpen() bool {
+func (c *MySqlConnection) IsOpen() bool {
 	return c.Connection != nil
 }
 
@@ -110,11 +110,11 @@ func (c *MysqlConnection) IsOpen() bool {
 //		- ctx context.Context
 //		- correlationId 	(optional) transaction id to trace execution through call chain.
 //		- Return 			error or nil no errors occurred.
-func (c *MysqlConnection) Open(ctx context.Context, correlationId string) error {
+func (c *MySqlConnection) Open(ctx context.Context, correlationId string) error {
 
 	uri, err := c.ConnectionResolver.Resolve(ctx, correlationId)
 	if err != nil {
-		c.Logger.Error(ctx, correlationId, err, "Failed to resolve Mysql connection")
+		c.Logger.Error(ctx, correlationId, err, "Failed to resolve MySql connection")
 		return nil
 	}
 
@@ -156,7 +156,7 @@ func (c *MysqlConnection) Open(ctx context.Context, correlationId string) error 
 //		- ctx context.Context
 //		- correlationId (optional) transaction id to trace execution through call chain.
 //	Returns: error or nil no errors occurred
-func (c *MysqlConnection) Close(ctx context.Context, correlationId string) error {
+func (c *MySqlConnection) Close(ctx context.Context, correlationId string) error {
 	if c.Connection == nil {
 		return nil
 	}
@@ -167,15 +167,15 @@ func (c *MysqlConnection) Close(ctx context.Context, correlationId string) error
 	return nil
 }
 
-func (c *MysqlConnection) GetConnection() *sql.DB {
+func (c *MySqlConnection) GetConnection() *sql.DB {
 	return c.Connection
 }
 
-func (c *MysqlConnection) GetDatabaseName() string {
+func (c *MySqlConnection) GetDatabaseName() string {
 	return c.DatabaseName
 }
 
-func (c *MysqlConnection) waitForRetry(ctx context.Context, correlationId string, retries int) error {
+func (c *MySqlConnection) waitForRetry(ctx context.Context, correlationId string, retries int) error {
 	waitTime := DefaultConnectTimeout * int(math.Pow(float64(c.retries-retries), 2))
 
 	select {

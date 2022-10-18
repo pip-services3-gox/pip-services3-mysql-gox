@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMysqlConnection(t *testing.T) {
-	var connection *conn.MysqlConnection
+func TestMySqlConnection(t *testing.T) {
+	var connection *conn.MySqlConnection
 
 	mysqlUri := os.Getenv("MYSQL_URI")
 	mysqlHost := os.Getenv("MYSQL_HOST")
@@ -51,7 +51,7 @@ func TestMysqlConnection(t *testing.T) {
 		"options.idle_timeout", 100,
 	)
 
-	connection = conn.NewMysqlConnection()
+	connection = conn.NewMySqlConnection()
 	connection.Configure(context.Background(), dbConfig)
 	err := connection.Open(context.Background(), "")
 	assert.Nil(t, err)

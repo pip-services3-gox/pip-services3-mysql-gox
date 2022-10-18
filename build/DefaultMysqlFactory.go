@@ -6,21 +6,21 @@ import (
 	conn "github.com/pip-services3-gox/pip-services3-mysql-gox/connect"
 )
 
-// DefaultMysqlFactory creates Mysql components by their descriptors.
+// DefaultMySqlFactory creates MySql components by their descriptors.
 //	see Factory
-//	see MysqlConnection
-type DefaultMysqlFactory struct {
+//	see MySqlConnection
+type DefaultMySqlFactory struct {
 	*cbuild.Factory
 }
 
 //	Create a new instance of the factory.
-func NewDefaultMysqlFactory() *DefaultMysqlFactory {
+func NewDefaultMySqlFactory() *DefaultMySqlFactory {
 
-	c := &DefaultMysqlFactory{}
+	c := &DefaultMySqlFactory{}
 	c.Factory = cbuild.NewFactory()
 
 	mysqlConnectionDescriptor := cref.NewDescriptor("pip-services", "connection", "mysql", "*", "1.0")
-	c.RegisterType(mysqlConnectionDescriptor, conn.NewMysqlConnection)
+	c.RegisterType(mysqlConnectionDescriptor, conn.NewMySqlConnection)
 
 	return c
 }

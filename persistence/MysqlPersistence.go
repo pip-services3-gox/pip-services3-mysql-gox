@@ -20,14 +20,14 @@ import (
 	conn "github.com/pip-services3-gox/pip-services3-mysql-gox/connect"
 )
 
-type IMysqlPersistenceOverrides[T any] interface {
+type IMySqlPersistenceOverrides[T any] interface {
 	DefineSchema()
 	ConvertFromPublic(item T) (map[string]any, error)
 	ConvertToPublic(item *sql.Rows) (T, error)
 	ConvertFromPublicPartial(item map[string]any) (map[string]any, error)
 }
 
-// MysqlPersistence Abstract persistence component that stores data in MySql using plain driver.
+// MySqlPersistence Abstract persistence component that stores data in MySql using plain driver.
 //
 // This is the most basic persistence component that is only
 // able to store data items of any type. Specific CRUD operations
@@ -57,6 +57,7 @@ type IMysqlPersistenceOverrides[T any] interface {
 //		- *:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials
 //
 // Example:
+//
 //	import (
 //		"context"
 //		"fmt"
@@ -68,12 +69,12 @@ type IMysqlPersistenceOverrides[T any] interface {
 //	)
 //
 //	type MyMySqlPersistence struct {
-//		*persist.MysqlPersistence[fixtures.Dummy]
+//		*persist.MySqlPersistence[fixtures.Dummy]
 //	}
 //
 //	func NewMyMySqlPersistence() *MyMySqlPersistence {
 //		c := &MyMySqlPersistence{}
-//		c.MysqlPersistence = persist.InheritMysqlPersistence[fixtures.Dummy](c, "mydata")
+//		c.MySqlPersistence = persist.InheritMySqlPersistence[fixtures.Dummy](c, "mydata")
 //		return c
 //	}
 //
@@ -157,8 +158,8 @@ type IMysqlPersistenceOverrides[T any] interface {
 //		fmt.Println(item) // Result: { Id: "1", Name: "ABC" }
 //	}
 //
-type MysqlPersistence[T any] struct {
-	Overrides IMysqlPersistenceOverrides[T]
+type MySqlPersistence[T any] struct {
+	Overrides IMySqlPersistenceOverrides[T]
 	// Defines general JSON convertors
 	JsonConvertor    cconv.IJSONEngine[T]
 	JsonMapConvertor cconv.IJSONEngine[map[string]any]
@@ -176,7 +177,7 @@ type MysqlPersistence[T any] struct {
 	//The logger.
 	Logger *clog.CompositeLogger
 	//The MySql connection component.
-	Connection *conn.MysqlConnection
+	Connection *conn.MySqlConnection
 	//The MySql connection pool object.
 	Client *sql.DB
 	//The MySql database name.
@@ -194,13 +195,12 @@ type MysqlPersistence[T any] struct {
 	isTerminated chan struct{}
 }
 
-// InheritMysqlPersistence creates a new instance of the persistence component.
+// InheritMySqlPersistence creates a new instance of the persistence component.
 //	Parameters:
-//		- ctx context.Context
 //		- overrides References to override virtual methods
 //		- tableName    (optional) a table name.
-func InheritMysqlPersistence[T any](overrides IMysqlPersistenceOverrides[T], tableName string) *MysqlPersistence[T] {
-	c := &MysqlPersistence[T]{
+func InheritMySqlPersistence[T any](overrides IMySqlPersistenceOverrides[T], tableName string) *MySqlPersistence[T] {
+	c := &MySqlPersistence[T]{
 		Overrides: overrides,
 		defaultConfig: cconf.NewConfigParamsFromTuples(
 			"collection", nil,
@@ -231,7 +231,7 @@ func InheritMysqlPersistence[T any](overrides IMysqlPersistenceOverrides[T], tab
 //	Parameters:
 //		- ctx context.Context
 //		- config configuration parameters to be set.
-func (c *MysqlPersistence[T]) Configure(ctx context.Context, config *cconf.ConfigParams) {
+func (c *MySqlPersistence[T]) Configure(ctx context.Context, config *cconf.ConfigParams) {
 	config = config.SetDefaults(c.defaultConfig)
 	c.config = config
 
@@ -247,7 +247,7 @@ func (c *MysqlPersistence[T]) Configure(ctx context.Context, config *cconf.Confi
 //	Parameters:
 //		- ctx context.Context
 //		- references references to locate the component dependencies.
-func (c *MysqlPersistence[T]) SetReferences(ctx context.Context, references cref.IReferences) {
+func (c *MySqlPersistence[T]) SetReferences(ctx context.Context, references cref.IReferences) {
 
 	c.references = references
 	c.Logger.SetReferences(ctx, references)
@@ -256,7 +256,7 @@ func (c *MysqlPersistence[T]) SetReferences(ctx context.Context, references cref
 	c.DependencyResolver.SetReferences(ctx, references)
 	result := c.DependencyResolver.GetOneOptional("connection")
 
-	if dep, ok := result.(*conn.MysqlConnection); ok {
+	if dep, ok := result.(*conn.MySqlConnection); ok {
 		c.Connection = dep
 	}
 	// Or create a local one
@@ -269,12 +269,12 @@ func (c *MysqlPersistence[T]) SetReferences(ctx context.Context, references cref
 }
 
 // UnsetReferences (clears) previously set references to dependent components.
-func (c *MysqlPersistence[T]) UnsetReferences() {
+func (c *MySqlPersistence[T]) UnsetReferences() {
 	c.Connection = nil
 }
 
-func (c *MysqlPersistence[T]) createConnection(ctx context.Context) *conn.MysqlConnection {
-	connection := conn.NewMysqlConnection()
+func (c *MySqlPersistence[T]) createConnection(ctx context.Context) *conn.MySqlConnection {
+	connection := conn.NewMySqlConnection()
 	if c.config != nil {
 		connection.Configure(ctx, c.config)
 	}
@@ -288,7 +288,7 @@ func (c *MysqlPersistence[T]) createConnection(ctx context.Context) *conn.MysqlC
 //	Parameters:
 //		- keys index keys (fields)
 //		- options index options
-func (c *MysqlPersistence[T]) EnsureIndex(name string, keys map[string]string, options map[string]string) {
+func (c *MySqlPersistence[T]) EnsureIndex(name string, keys map[string]string, options map[string]string) {
 	builder := "CREATE"
 	if options == nil {
 		options = make(map[string]string, 0)
@@ -329,27 +329,27 @@ func (c *MysqlPersistence[T]) EnsureIndex(name string, keys map[string]string, o
 
 // DefineSchema a database schema for this persistence, have to call in child class
 // Override in child classes
-func (c *MysqlPersistence[T]) DefineSchema() {
+func (c *MySqlPersistence[T]) DefineSchema() {
 	c.ClearSchema()
 }
 
 // EnsureSchema adds a statement to schema definition
 //	Parameters:
 //   - schemaStatement a statement to be added to the schema
-func (c *MysqlPersistence[T]) EnsureSchema(schemaStatement string) {
+func (c *MySqlPersistence[T]) EnsureSchema(schemaStatement string) {
 	c.schemaStatements = append(c.schemaStatements, schemaStatement)
 }
 
 // ClearSchema clears all auto-created objects
-func (c *MysqlPersistence[T]) ClearSchema() {
+func (c *MySqlPersistence[T]) ClearSchema() {
 	c.schemaStatements = []string{}
 }
 
-// ConvertToPublic converts object value from internal to func (c * MysqlPersistence) format.
+// ConvertToPublic converts object value from internal to func (c * MySqlPersistence) format.
 //	Parameters:
 //		- value an object in internal format to convert.
-//	Returns: converted object in func (c * MysqlPersistence) format.
-func (c *MysqlPersistence[T]) ConvertToPublic(rows *sql.Rows) (T, error) {
+//	Returns: converted object in func (c * MySqlPersistence) format.
+func (c *MySqlPersistence[T]) ConvertToPublic(rows *sql.Rows) (T, error) {
 	var defaultValue T
 	columns, err := rows.Columns()
 	if err != nil {
@@ -395,11 +395,11 @@ func (c *MysqlPersistence[T]) ConvertToPublic(rows *sql.Rows) (T, error) {
 
 }
 
-// ConvertFromPublic сonvert object value from func (c * MysqlPersistence) to internal format.
+// ConvertFromPublic сonvert object value from func (c * MySqlPersistence) to internal format.
 //	Parameters:
-//		- value an object in func (c * MysqlPersistence) format to convert.
+//		- value an object in func (c * MySqlPersistence) format to convert.
 //	Returns: converted object in internal format.
-func (c *MysqlPersistence[T]) ConvertFromPublic(value T) (map[string]any, error) {
+func (c *MySqlPersistence[T]) ConvertFromPublic(value T) (map[string]any, error) {
 	buf, toJsonErr := cconv.JsonConverter.ToJson(value)
 	if toJsonErr != nil {
 		return nil, toJsonErr
@@ -414,7 +414,7 @@ func (c *MysqlPersistence[T]) ConvertFromPublic(value T) (map[string]any, error)
 //	Parameters:
 //		- value the object to convert from the public partial format.
 //	Returns: the initial object.
-func (c *MysqlPersistence[T]) ConvertFromPublicPartial(value map[string]any) (map[string]any, error) {
+func (c *MySqlPersistence[T]) ConvertFromPublicPartial(value map[string]any) (map[string]any, error) {
 	buf, toJsonErr := cconv.JsonConverter.ToJson(value)
 	if toJsonErr != nil {
 		return nil, toJsonErr
@@ -424,7 +424,7 @@ func (c *MysqlPersistence[T]) ConvertFromPublicPartial(value map[string]any) (ma
 	return item, fromJsonErr
 }
 
-func (c *MysqlPersistence[T]) QuoteIdentifier(value string) string {
+func (c *MySqlPersistence[T]) QuoteIdentifier(value string) string {
 	if value == "" {
 		return value
 	}
@@ -435,7 +435,7 @@ func (c *MysqlPersistence[T]) QuoteIdentifier(value string) string {
 }
 
 // QuotedTableName return quoted SchemaName with TableName ("schema"."table")
-func (c *MysqlPersistence[T]) QuotedTableName() string {
+func (c *MySqlPersistence[T]) QuotedTableName() string {
 	if len(c.SchemaName) > 0 {
 		return c.QuoteIdentifier(c.SchemaName) + "." + c.QuoteIdentifier(c.TableName)
 	}
@@ -444,13 +444,13 @@ func (c *MysqlPersistence[T]) QuotedTableName() string {
 
 // IsOpen checks if the component is opened.
 //	Returns: true if the component has been opened and false otherwise.
-func (c *MysqlPersistence[T]) IsOpen() bool {
+func (c *MySqlPersistence[T]) IsOpen() bool {
 	return c.opened
 }
 
 // IsTerminated checks if the wee need to terminate process before close component.
 //	Returns: true if you need terminate your processes.
-func (c *MysqlPersistence[T]) IsTerminated() bool {
+func (c *MySqlPersistence[T]) IsTerminated() bool {
 	select {
 	case _, ok := <-c.isTerminated:
 		if !ok {
@@ -467,7 +467,7 @@ func (c *MysqlPersistence[T]) IsTerminated() bool {
 //		- ctx context.Context
 //		- correlationId (optional) transaction id to trace execution through call chain.
 //	Returns: error or nil no errors occurred.
-func (c *MysqlPersistence[T]) Open(ctx context.Context, correlationId string) (err error) {
+func (c *MySqlPersistence[T]) Open(ctx context.Context, correlationId string) (err error) {
 	if c.opened {
 		return nil
 	}
@@ -520,13 +520,13 @@ func (c *MysqlPersistence[T]) Open(ctx context.Context, correlationId string) (e
 //		- ctx context.Context
 //		- correlationId (optional) transaction id to trace execution through call chain.
 //	Returns: error or nil no errors occurred.
-func (c *MysqlPersistence[T]) Close(ctx context.Context, correlationId string) (err error) {
+func (c *MySqlPersistence[T]) Close(ctx context.Context, correlationId string) (err error) {
 	if !c.opened {
 		return nil
 	}
 
 	if c.Connection == nil {
-		return cerr.NewInvalidStateError(correlationId, "NO_CONNECTION", "Mysql connection is missing")
+		return cerr.NewInvalidStateError(correlationId, "NO_CONNECTION", "MySql connection is missing")
 	}
 
 	close(c.isTerminated)
@@ -548,7 +548,7 @@ func (c *MysqlPersistence[T]) Close(ctx context.Context, correlationId string) (
 //		- ctx context.Context
 //		- correlationId 	(optional) transaction id to trace execution through call chain.
 //	Returns: error or nil no errors occured.
-func (c *MysqlPersistence[T]) Clear(ctx context.Context, correlationId string) error {
+func (c *MySqlPersistence[T]) Clear(ctx context.Context, correlationId string) error {
 	// Return error if collection is not set
 	if c.TableName == "" {
 		return errors.New("Table name is not defined")
@@ -564,7 +564,7 @@ func (c *MysqlPersistence[T]) Clear(ctx context.Context, correlationId string) e
 	return nil
 }
 
-func (c *MysqlPersistence[T]) CreateSchema(ctx context.Context, correlationId string) (err error) {
+func (c *MySqlPersistence[T]) CreateSchema(ctx context.Context, correlationId string) (err error) {
 	if len(c.schemaStatements) == 0 {
 		return nil
 	}
@@ -590,7 +590,7 @@ func (c *MysqlPersistence[T]) CreateSchema(ctx context.Context, correlationId st
 	return nil
 }
 
-func (c *MysqlPersistence[T]) checkTableExists(ctx context.Context) (bool, error) {
+func (c *MySqlPersistence[T]) checkTableExists(ctx context.Context) (bool, error) {
 	// Check if table exist to determine either to auto create objects
 	query := "SHOW TABLES LIKE '" + c.TableName + "'"
 	result, err := c.Client.QueryContext(ctx, query)
@@ -646,7 +646,7 @@ func (c *MysqlPersistence[T]) checkTableExists(ctx context.Context) (bool, error
 //	Parameters:
 //		- columns an array with column values
 //	Returns: a generated list of column names
-func (c *MysqlPersistence[T]) GenerateColumns(columns []string) string {
+func (c *MySqlPersistence[T]) GenerateColumns(columns []string) string {
 	if len(columns) == 0 {
 		return ""
 	}
@@ -666,7 +666,7 @@ func (c *MysqlPersistence[T]) GenerateColumns(columns []string) string {
 //	Parameters:
 //		- values an array with column values or a key-value map
 //	Returns: a generated list of value parameters
-func (c *MysqlPersistence[T]) GenerateParameters(valuesCount int) string {
+func (c *MySqlPersistence[T]) GenerateParameters(valuesCount int) string {
 	if valuesCount <= 0 {
 		return ""
 	}
@@ -686,7 +686,7 @@ func (c *MysqlPersistence[T]) GenerateParameters(valuesCount int) string {
 //	Parameters:
 //		- values an array with column values or a key-value map
 //	Returns: a generated list of column sets
-func (c *MysqlPersistence[T]) GenerateSetParameters(columns []string) string {
+func (c *MySqlPersistence[T]) GenerateSetParameters(columns []string) string {
 
 	if len(columns) == 0 {
 		return ""
@@ -707,7 +707,7 @@ func (c *MysqlPersistence[T]) GenerateSetParameters(columns []string) string {
 //	Parameters:
 //		- values an array with column values or a key-value map
 //	Returns: a generated list of column values
-func (c *MysqlPersistence[T]) GenerateColumnsAndValues(objMap map[string]any) ([]string, []any) {
+func (c *MySqlPersistence[T]) GenerateColumnsAndValues(objMap map[string]any) ([]string, []any) {
 	if len(objMap) == 0 {
 		return nil, nil
 	}
@@ -723,7 +723,7 @@ func (c *MysqlPersistence[T]) GenerateColumnsAndValues(objMap map[string]any) ([
 }
 
 // GetPageByFilter gets a page of data items retrieved by a given filter and sorted according to sort parameters.
-// This method shall be called by a func (c * MysqlPersistence) getPageByFilter method from child class that
+// This method shall be called by a func (c * MySqlPersistence) getPageByFilter method from child class that
 // receives FilterParams and converts them into a filter function.
 //	Parameters:
 //		- ctx context.Context
@@ -733,7 +733,7 @@ func (c *MysqlPersistence[T]) GenerateColumnsAndValues(objMap map[string]any) ([
 //		- sort              (optional) sorting JSON object
 //		- select            (optional) projection JSON object
 //	Returns: receives a data page or error.
-func (c *MysqlPersistence[T]) GetPageByFilter(ctx context.Context, correlationId string,
+func (c *MySqlPersistence[T]) GetPageByFilter(ctx context.Context, correlationId string,
 	filter string, paging cdata.PagingParams, sort string, selection string) (page cdata.DataPage[T], err error) {
 
 	query := "SELECT * FROM " + c.QuotedTableName()
@@ -797,14 +797,14 @@ func (c *MysqlPersistence[T]) GetPageByFilter(ctx context.Context, correlationId
 }
 
 // GetCountByFilter gets a number of data items retrieved by a given filter.
-// This method shall be called by a func (c * MysqlPersistence) getCountByFilter method from child class that
+// This method shall be called by a func (c * MySqlPersistence) getCountByFilter method from child class that
 // receives FilterParams and converts them into a filter function.
 //	Parameters:
 //		- ctx context.Context
 //		- correlationId     (optional) transaction id to trace execution through call chain.
 //		- filter            (optional) a filter JSON object
 //	Returns: data page or error.
-func (c *MysqlPersistence[T]) GetCountByFilter(ctx context.Context, correlationId string,
+func (c *MySqlPersistence[T]) GetCountByFilter(ctx context.Context, correlationId string,
 	filter string) (int64, error) {
 
 	query := "SELECT COUNT(*) AS count FROM " + c.QuotedTableName()
@@ -842,7 +842,7 @@ func (c *MysqlPersistence[T]) GetCountByFilter(ctx context.Context, correlationI
 }
 
 // GetListByFilter gets a list of data items retrieved by a given filter and sorted according to sort parameters.
-// This method shall be called by a func (c * MysqlPersistence) getListByFilter method from child class that
+// This method shall be called by a func (c * MySqlPersistence) getListByFilter method from child class that
 // receives FilterParams and converts them into a filter function.
 //	Parameters:
 //		- ctx context.Context
@@ -852,7 +852,7 @@ func (c *MysqlPersistence[T]) GetCountByFilter(ctx context.Context, correlationI
 //		- sort             (optional) sorting JSON object
 //		- select           (optional) projection JSON object
 //	Returns: data list or error.
-func (c *MysqlPersistence[T]) GetListByFilter(ctx context.Context, correlationId string,
+func (c *MySqlPersistence[T]) GetListByFilter(ctx context.Context, correlationId string,
 	filter string, sort string, selection string) (items []T, err error) {
 
 	query := "SELECT * FROM " + c.QuotedTableName()
@@ -898,14 +898,14 @@ func (c *MysqlPersistence[T]) GetListByFilter(ctx context.Context, correlationId
 }
 
 // GetOneRandom gets a random item from items that match to a given filter.
-// This method shall be called by a func (c * MysqlPersistence) getOneRandom method from child class that
+// This method shall be called by a func (c * MySqlPersistence) getOneRandom method from child class that
 // receives FilterParams and converts them into a filter function.
 //	Parameters:
 //		- ctx context.Context
 //		- correlationId     (optional) transaction id to trace execution through call chain.
 //		- filter            (optional) a filter JSON object
 //	Returns: random item or error.
-func (c *MysqlPersistence[T]) GetOneRandom(ctx context.Context, correlationId string, filter string) (item T, err error) {
+func (c *MySqlPersistence[T]) GetOneRandom(ctx context.Context, correlationId string, filter string) (item T, err error) {
 	count, err := c.GetCountByFilter(ctx, correlationId, filter)
 	if err != nil {
 		return item, err
@@ -956,7 +956,7 @@ func (c *MysqlPersistence[T]) GetOneRandom(ctx context.Context, correlationId st
 //		- correlation_id    (optional) transaction id to trace execution through call chain.
 //		- item              an item to be created.
 //	Returns: (optional) callback function that receives created item or error.
-func (c *MysqlPersistence[T]) Create(ctx context.Context, correlationId string, item T) (result T, err error) {
+func (c *MySqlPersistence[T]) Create(ctx context.Context, correlationId string, item T) (result T, err error) {
 	objMap, convErr := c.Overrides.ConvertFromPublic(item)
 	if convErr != nil {
 		return result, convErr
@@ -981,14 +981,14 @@ func (c *MysqlPersistence[T]) Create(ctx context.Context, correlationId string, 
 }
 
 // DeleteByFilter deletes data items that match to a given filter.
-// This method shall be called by a func (c * MysqlPersistence) deleteByFilter method from child class that
+// This method shall be called by a func (c * MySqlPersistence) deleteByFilter method from child class that
 // receives FilterParams and converts them into a filter function.
 //	Parameters:
 //		- ctx context.Context
 //		- correlationId     (optional) transaction id to trace execution through call chain.
 //		- filter            (optional) a filter JSON object.
 //	Returns: error or nil for success.
-func (c *MysqlPersistence[T]) DeleteByFilter(ctx context.Context, correlationId string, filter string) error {
+func (c *MySqlPersistence[T]) DeleteByFilter(ctx context.Context, correlationId string, filter string) error {
 	query := "DELETE FROM " + c.QuotedTableName()
 	if len(filter) > 0 {
 		query += " WHERE " + filter
@@ -1008,7 +1008,7 @@ func (c *MysqlPersistence[T]) DeleteByFilter(ctx context.Context, correlationId 
 	return nil
 }
 
-func (c *MysqlPersistence[T]) cloneItem(item any) T {
+func (c *MySqlPersistence[T]) cloneItem(item any) T {
 	if cloneableItem, ok := item.(cdata.ICloneable[T]); ok {
 		return cloneableItem.Clone()
 	}

@@ -9,7 +9,7 @@ import (
 	cdata "github.com/pip-services3-gox/pip-services3-commons-gox/data"
 )
 
-// IdentifiableMysqlPersistence Abstract persistence component that stores data in MySQL
+// IdentifiableMySqlPersistence Abstract persistence component that stores data in MySQL
 // and implements a number of CRUD operations over data items with unique ids.
 // The data items must implement IIdentifiable interface.
 //
@@ -43,21 +43,21 @@ import (
 //
 // Example:
 //	type MyMySqlPersistence struct {
-//		*persist.IdentifiableMysqlPersistence[MyData, string]
+//		*persist.IdentifiableMySqlPersistence[MyData, string]
 //	}
 //
 //	func NewMyMySqlPersistence() *MyMySqlPersistence {
 //		c := &MyMySqlPersistence{}
-//		c.IdentifiableMysqlPersistence = persist.InheritIdentifiableMysqlPersistence[MyData, string](c, "mydata")
+//		c.IdentifiableMySqlPersistence = persist.InheritIdentifiableMySqlPersistence[MyData, string](c, "mydata")
 //		return c
 //	}
 //
 //	func (c *MyMySqlPersistence) DefineSchema() {
 //		c.ClearSchema()
-//		c.IdentifiableMysqlPersistence.DefineSchema()
+//		c.IdentifiableMySqlPersistence.DefineSchema()
 //		// Row name must be in double quotes for properly case!!!
 //		c.EnsureSchema("CREATE TABLE `" + c.TableName + "` (id VARCHAR(32) PRIMARY KEY, `key` VARCHAR(50), `content` TEXT)")
-//		c.EnsureIndex(c.IdentifiableMysqlPersistence.TableName+"_key", map[string]string{"key": "1"}, map[string]string{"unique": "true"})
+//		c.EnsureIndex(c.IdentifiableMySqlPersistence.TableName+"_key", map[string]string{"key": "1"}, map[string]string{"unique": "true"})
 //	}
 //
 //	func (c *MyMySqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
@@ -70,7 +70,7 @@ import (
 //		}
 //		sorting := ""
 //
-//		return c.IdentifiableMysqlPersistence.GetPageByFilter(ctx, correlationId,
+//		return c.IdentifiableMySqlPersistence.GetPageByFilter(ctx, correlationId,
 //			filterObj, paging,
 //			sorting, "",
 //		)
@@ -93,22 +93,22 @@ import (
 //		res, err := persistence.DeleteById(context.Background(), "123", "1")
 //	}
 //
-type IdentifiableMysqlPersistence[T any, K any] struct {
-	*MysqlPersistence[T]
+type IdentifiableMySqlPersistence[T any, K any] struct {
+	*MySqlPersistence[T]
 }
 
-// InheritIdentifiableMysqlPersistence creates a new instance of the persistence component.
+// InheritIdentifiableMySqlPersistence creates a new instance of the persistence component.
 //	Parameters:
 //		- ctx context.Context
 //		- overrides References to override virtual methods
 //		- tableName    (optional) a table name.
-func InheritIdentifiableMysqlPersistence[T any, K any](overrides IMysqlPersistenceOverrides[T], tableName string) *IdentifiableMysqlPersistence[T, K] {
+func InheritIdentifiableMySqlPersistence[T any, K any](overrides IMySqlPersistenceOverrides[T], tableName string) *IdentifiableMySqlPersistence[T, K] {
 	if tableName == "" {
 		panic("Table name could not be empty")
 	}
 
-	c := &IdentifiableMysqlPersistence[T, K]{}
-	c.MysqlPersistence = InheritMysqlPersistence[T](overrides, tableName)
+	c := &IdentifiableMySqlPersistence[T, K]{}
+	c.MySqlPersistence = InheritMySqlPersistence[T](overrides, tableName)
 
 	return c
 }
@@ -119,7 +119,7 @@ func InheritIdentifiableMysqlPersistence[T any, K any](overrides IMysqlPersisten
 //		- correlationId     (optional) transaction id to trace execution through call chain.
 //		- ids of data items to be retrieved
 //	Returns: a data list or error.
-func (c *IdentifiableMysqlPersistence[T, K]) GetListByIds(ctx context.Context, correlationId string,
+func (c *IdentifiableMySqlPersistence[T, K]) GetListByIds(ctx context.Context, correlationId string,
 	ids []K) (items []T, err error) {
 
 	ln := len(ids)
@@ -160,7 +160,7 @@ func (c *IdentifiableMysqlPersistence[T, K]) GetListByIds(ctx context.Context, c
 //		- correlationId     (optional) transaction id to trace execution through call chain.
 //		- id                an id of data item to be retrieved.
 // Returns: data item or error.
-func (c *IdentifiableMysqlPersistence[T, K]) GetOneById(ctx context.Context, correlationId string, id K) (item T, err error) {
+func (c *IdentifiableMySqlPersistence[T, K]) GetOneById(ctx context.Context, correlationId string, id K) (item T, err error) {
 
 	query := "SELECT * FROM " + c.QuotedTableName() + " WHERE id=?"
 
@@ -188,11 +188,11 @@ func (c *IdentifiableMysqlPersistence[T, K]) GetOneById(ctx context.Context, cor
 //		- correlation_id    (optional) transaction id to trace execution through call chain.
 //		- item              an item to be created.
 //	Returns: (optional)  created item or error.
-func (c *IdentifiableMysqlPersistence[T, K]) Create(ctx context.Context, correlationId string, item T) (result T, err error) {
+func (c *IdentifiableMySqlPersistence[T, K]) Create(ctx context.Context, correlationId string, item T) (result T, err error) {
 	newItem := c.cloneItem(item)
 	newItem = GenerateObjectIdIfNotExists[T](newItem)
 
-	return c.MysqlPersistence.Create(ctx, correlationId, newItem)
+	return c.MySqlPersistence.Create(ctx, correlationId, newItem)
 }
 
 // Set a data item. If the data item exists it updates it,
@@ -202,7 +202,7 @@ func (c *IdentifiableMysqlPersistence[T, K]) Create(ctx context.Context, correla
 //		- correlation_id    (optional) transaction id to trace execution through call chain.
 //		- item              an item to be set.
 //	Returns: (optional)  updated item or error.
-func (c *IdentifiableMysqlPersistence[T, K]) Set(ctx context.Context, correlationId string, item T) (result T, err error) {
+func (c *IdentifiableMySqlPersistence[T, K]) Set(ctx context.Context, correlationId string, item T) (result T, err error) {
 	objMap, convErr := c.Overrides.ConvertFromPublic(item)
 	if convErr != nil {
 		return result, convErr
@@ -257,7 +257,7 @@ func (c *IdentifiableMysqlPersistence[T, K]) Set(ctx context.Context, correlatio
 //		- correlation_id    (optional) transaction id to trace execution through call chain.
 //		- item              an item to be updated.
 //	Returns          (optional)  updated item or error.
-func (c *IdentifiableMysqlPersistence[T, K]) Update(ctx context.Context, correlationId string, item T) (result T, err error) {
+func (c *IdentifiableMySqlPersistence[T, K]) Update(ctx context.Context, correlationId string, item T) (result T, err error) {
 	objMap, convErr := c.Overrides.ConvertFromPublic(item)
 	if convErr != nil {
 		return result, convErr
@@ -304,7 +304,7 @@ func (c *IdentifiableMysqlPersistence[T, K]) Update(ctx context.Context, correla
 //		- id                an id of data item to be updated.
 //		- data              a map with fields to be updated.
 //	Returns: updated item or error.
-func (c *IdentifiableMysqlPersistence[T, K]) UpdatePartially(ctx context.Context, correlationId string, id K, data cdata.AnyValueMap) (result T, err error) {
+func (c *IdentifiableMySqlPersistence[T, K]) UpdatePartially(ctx context.Context, correlationId string, id K, data cdata.AnyValueMap) (result T, err error) {
 	objMap, convErr := c.Overrides.ConvertFromPublicPartial(data.Value())
 	if convErr != nil {
 		return result, convErr
@@ -348,7 +348,7 @@ func (c *IdentifiableMysqlPersistence[T, K]) UpdatePartially(ctx context.Context
 //		- correlation_id    (optional) transaction id to trace execution through call chain.
 //		- id                an id of the item to be deleted
 //	Returns: (optional)  deleted item or error.
-func (c *IdentifiableMysqlPersistence[T, K]) DeleteById(ctx context.Context, correlationId string, id K) (result T, err error) {
+func (c *IdentifiableMySqlPersistence[T, K]) DeleteById(ctx context.Context, correlationId string, id K) (result T, err error) {
 	query := "SELECT * FROM " + c.QuotedTableName() + " WHERE id=?"
 
 	rows, err := c.Client.QueryContext(ctx, query, []any{id}...)
@@ -384,7 +384,7 @@ func (c *IdentifiableMysqlPersistence[T, K]) DeleteById(ctx context.Context, cor
 //		- correlationId     (optional) transaction id to trace execution through call chain.
 //		- ids                of data items to be deleted.
 //	Returns: (optional)  error or null for success.
-func (c *IdentifiableMysqlPersistence[T, K]) DeleteByIds(ctx context.Context, correlationId string, ids []K) error {
+func (c *IdentifiableMySqlPersistence[T, K]) DeleteByIds(ctx context.Context, correlationId string, ids []K) error {
 
 	ln := len(ids)
 	paramsStr := c.GenerateParameters(ln)

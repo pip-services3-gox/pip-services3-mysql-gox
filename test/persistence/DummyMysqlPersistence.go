@@ -8,25 +8,25 @@ import (
 	"github.com/pip-services3-gox/pip-services3-mysql-gox/test/fixtures"
 )
 
-type DummyMysqlPersistence struct {
-	*persist.IdentifiableMysqlPersistence[fixtures.Dummy, string]
+type DummyMySqlPersistence struct {
+	*persist.IdentifiableMySqlPersistence[fixtures.Dummy, string]
 }
 
-func NewDummyMysqlPersistence() *DummyMysqlPersistence {
-	c := &DummyMysqlPersistence{}
-	c.IdentifiableMysqlPersistence = persist.InheritIdentifiableMysqlPersistence[fixtures.Dummy, string](c, "dummies")
+func NewDummyMySqlPersistence() *DummyMySqlPersistence {
+	c := &DummyMySqlPersistence{}
+	c.IdentifiableMySqlPersistence = persist.InheritIdentifiableMySqlPersistence[fixtures.Dummy, string](c, "dummies")
 	return c
 }
 
-func (c *DummyMysqlPersistence) DefineSchema() {
+func (c *DummyMySqlPersistence) DefineSchema() {
 	c.ClearSchema()
-	c.IdentifiableMysqlPersistence.DefineSchema()
+	c.IdentifiableMySqlPersistence.DefineSchema()
 	// Row name must be in double quotes for properly case!!!
 	c.EnsureSchema("CREATE TABLE `" + c.TableName + "` (id VARCHAR(32) PRIMARY KEY, `key` VARCHAR(50), `content` TEXT)")
-	c.EnsureIndex(c.IdentifiableMysqlPersistence.TableName+"_key", map[string]string{"key": "1"}, map[string]string{"unique": "true"})
+	c.EnsureIndex(c.IdentifiableMySqlPersistence.TableName+"_key", map[string]string{"key": "1"}, map[string]string{"unique": "true"})
 }
 
-func (c *DummyMysqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
+func (c *DummyMySqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
 	filter cdata.FilterParams, paging cdata.PagingParams) (page cdata.DataPage[fixtures.Dummy], err error) {
 
 	key, ok := filter.GetAsNullableString("Key")
@@ -36,13 +36,13 @@ func (c *DummyMysqlPersistence) GetPageByFilter(ctx context.Context, correlation
 	}
 	sorting := ""
 
-	return c.IdentifiableMysqlPersistence.GetPageByFilter(ctx, correlationId,
+	return c.IdentifiableMySqlPersistence.GetPageByFilter(ctx, correlationId,
 		filterObj, paging,
 		sorting, "",
 	)
 }
 
-func (c *DummyMysqlPersistence) GetCountByFilter(ctx context.Context, correlationId string,
+func (c *DummyMySqlPersistence) GetCountByFilter(ctx context.Context, correlationId string,
 	filter cdata.FilterParams) (count int64, err error) {
 
 	key, ok := filter.GetAsNullableString("Key")
@@ -50,9 +50,9 @@ func (c *DummyMysqlPersistence) GetCountByFilter(ctx context.Context, correlatio
 	if ok && key != "" {
 		filterObj += "`key`='" + key + "'"
 	}
-	return c.IdentifiableMysqlPersistence.GetCountByFilter(ctx, correlationId, filterObj)
+	return c.IdentifiableMySqlPersistence.GetCountByFilter(ctx, correlationId, filterObj)
 }
 
-func (c *DummyMysqlPersistence) GetOneRandom(ctx context.Context, correlationId string) (item fixtures.Dummy, err error) {
-	return c.IdentifiableMysqlPersistence.GetOneRandom(ctx, correlationId, "")
+func (c *DummyMySqlPersistence) GetOneRandom(ctx context.Context, correlationId string) (item fixtures.Dummy, err error) {
+	return c.IdentifiableMySqlPersistence.GetOneRandom(ctx, correlationId, "")
 }

@@ -8,7 +8,7 @@ import (
 	cdata "github.com/pip-services3-gox/pip-services3-commons-gox/data"
 )
 
-// IdentifiableJsonMysqlPersistence is an abstract persistence component that stores data in MySQL in JSON or JSONB fields
+// IdentifiableJsonMySqlPersistence is an abstract persistence component that stores data in MySQL in JSON or JSONB fields
 // and implements a number of CRUD operations over data items with unique ids.
 // The data items must implement IIdentifiable interface.
 //
@@ -46,12 +46,12 @@ import (
 // Example:
 //
 //	type MyMySqlPersistence struct {
-//		*persist.IdentifiableJsonMysqlPersistence[MyData, string]
+//		*persist.IdentifiableJsonMySqlPersistence[MyData, string]
 //	}
 //
 //	func NewMyMySqlPersistence() *MyMySqlPersistence {
 //		c := &MyMySqlPersistence{}
-//		c.IdentifiableJsonMysqlPersistence = persist.InheritIdentifiableJsonMysqlPersistence[MyData, string](c, "mydata")
+//		c.IdentifiableJsonMySqlPersistence = persist.InheritIdentifiableJsonMySqlPersistence[MyData, string](c, "mydata")
 //		return c
 //	}
 //
@@ -71,7 +71,7 @@ import (
 //			filterObj += "data->'$.key'='" + key + "'"
 //		}
 //
-//		return c.IdentifiableJsonMysqlPersistence.GetPageByFilter(ctx, correlationId,
+//		return c.IdentifiableJsonMySqlPersistence.GetPageByFilter(ctx, correlationId,
 //			filterObj, paging,
 //			"", "",
 //		)
@@ -93,17 +93,17 @@ import (
 //		res, err := persistence.DeleteById(context.Background(),"123", "1")
 //	}
 //
-type IdentifiableJsonMysqlPersistence[T any, K any] struct {
-	*IdentifiableMysqlPersistence[T, K]
+type IdentifiableJsonMySqlPersistence[T any, K any] struct {
+	*IdentifiableMySqlPersistence[T, K]
 }
 
-// InheritIdentifiableJsonMysqlPersistence creates a new instance of the persistence component.
+// InheritIdentifiableJsonMySqlPersistence creates a new instance of the persistence component.
 //	Parameters:
 //		- overrides References to override virtual methods
 //		- tableName    (optional) a table name.
-func InheritIdentifiableJsonMysqlPersistence[T any, K any](overrides IMysqlPersistenceOverrides[T], tableName string) *IdentifiableJsonMysqlPersistence[T, K] {
-	c := &IdentifiableJsonMysqlPersistence[T, K]{}
-	c.IdentifiableMysqlPersistence = InheritIdentifiableMysqlPersistence[T, K](overrides, tableName)
+func InheritIdentifiableJsonMySqlPersistence[T any, K any](overrides IMySqlPersistenceOverrides[T], tableName string) *IdentifiableJsonMySqlPersistence[T, K] {
+	c := &IdentifiableJsonMySqlPersistence[T, K]{}
+	c.IdentifiableMySqlPersistence = InheritIdentifiableMySqlPersistence[T, K](overrides, tableName)
 	return c
 }
 
@@ -111,7 +111,7 @@ func InheritIdentifiableJsonMysqlPersistence[T any, K any](overrides IMysqlPersi
 //	Parameters:
 //   - idType type of the id column (default: VARCHAR(32))
 //   - dataType type of the data column (default: JSON)
-func (c *IdentifiableJsonMysqlPersistence[T, K]) EnsureTable(idType string, dataType string) {
+func (c *IdentifiableJsonMySqlPersistence[T, K]) EnsureTable(idType string, dataType string) {
 	if idType == "" {
 		idType = "VARCHAR(32)"
 	}
@@ -131,7 +131,7 @@ func (c *IdentifiableJsonMysqlPersistence[T, K]) EnsureTable(idType string, data
 //	Parameters:
 //		- value an object in internal format to convert.
 //	Returns: converted object in public format.
-func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertToPublic(rows *sql.Rows) (T, error) {
+func (c *IdentifiableJsonMySqlPersistence[T, K]) ConvertToPublic(rows *sql.Rows) (T, error) {
 	var defaultValue T
 	columns, err := rows.Columns()
 	if err != nil {
@@ -175,7 +175,7 @@ func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertToPublic(rows *sql.Rows)
 //	Parameters:
 //    - value     an object in public format to convert.
 // Returns converted object in internal format.
-func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertFromPublic(value T) (map[string]any, error) {
+func (c *IdentifiableJsonMySqlPersistence[T, K]) ConvertFromPublic(value T) (map[string]any, error) {
 	id := GetObjectId[K](value)
 
 	data, convErr := c.JsonConvertor.ToJson(value)
@@ -194,12 +194,12 @@ func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertFromPublic(value T) (map
 //	Parameters:
 //		- value     an object in public format to convert.
 //	Returns: converted object in internal format.
-func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertFromPublicPartial(value map[string]any) (map[string]any, error) {
+func (c *IdentifiableJsonMySqlPersistence[T, K]) ConvertFromPublicPartial(value map[string]any) (map[string]any, error) {
 	buf, toJsonErr := cconv.JsonConverter.ToJson(value)
 	if toJsonErr != nil {
 		return nil, toJsonErr
 	}
-	item, fromJsonErr := c.IdentifiableMysqlPersistence.JsonConvertor.FromJson(buf)
+	item, fromJsonErr := c.IdentifiableMySqlPersistence.JsonConvertor.FromJson(buf)
 	if toJsonErr != nil {
 		return nil, fromJsonErr
 	}
@@ -213,7 +213,7 @@ func (c *IdentifiableJsonMysqlPersistence[T, K]) ConvertFromPublicPartial(value 
 //		- id                an id of data item to be updated.
 //		- data              a map with fields to be updated.
 // Returns: receives updated item or error.
-func (c *IdentifiableJsonMysqlPersistence[T, K]) UpdatePartially(ctx context.Context, correlationId string,
+func (c *IdentifiableJsonMySqlPersistence[T, K]) UpdatePartially(ctx context.Context, correlationId string,
 	id K, data cdata.AnyValueMap) (result T, err error) {
 	buf, toJsonErr := cconv.JsonConverter.ToJson(data.Value())
 	if toJsonErr != nil {
@@ -223,7 +223,7 @@ func (c *IdentifiableJsonMysqlPersistence[T, K]) UpdatePartially(ctx context.Con
 	query := "UPDATE " + c.QuotedTableName() + " SET `data`=JSON_MERGE_PATCH(data,?) WHERE id=?"
 	values := []any{buf, id}
 
-	_, err = c.IdentifiableMysqlPersistence.Client.ExecContext(ctx, query, values...)
+	_, err = c.IdentifiableMySqlPersistence.Client.ExecContext(ctx, query, values...)
 	if err != nil {
 		return result, err
 	}
@@ -242,11 +242,11 @@ func (c *IdentifiableJsonMysqlPersistence[T, K]) UpdatePartially(ctx context.Con
 	}
 
 	if err == nil {
-		result, convErr := c.IdentifiableMysqlPersistence.Overrides.ConvertToPublic(rows)
+		result, convErr := c.IdentifiableMySqlPersistence.Overrides.ConvertToPublic(rows)
 		if convErr != nil {
 			return result, convErr
 		}
-		c.IdentifiableMysqlPersistence.Logger.Trace(ctx, correlationId, "Updated partially in %s with id = %s", c.IdentifiableMysqlPersistence.TableName, id)
+		c.IdentifiableMySqlPersistence.Logger.Trace(ctx, correlationId, "Updated partially in %s with id = %s", c.IdentifiableMySqlPersistence.TableName, id)
 		return result, nil
 	}
 	return result, rows.Err()

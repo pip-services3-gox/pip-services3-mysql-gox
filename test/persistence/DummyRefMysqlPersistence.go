@@ -8,17 +8,17 @@ import (
 	"github.com/pip-services3-gox/pip-services3-mysql-gox/test/fixtures"
 )
 
-type DummyRefMysqlPersistence struct {
-	persist.IdentifiableMysqlPersistence[*fixtures.Dummy, string]
+type DummyRefMySqlPersistence struct {
+	persist.IdentifiableMySqlPersistence[*fixtures.Dummy, string]
 }
 
-func NewDummyRefMysqlPersistence() *DummyRefMysqlPersistence {
-	c := &DummyRefMysqlPersistence{}
-	c.IdentifiableMysqlPersistence = *persist.InheritIdentifiableMysqlPersistence[*fixtures.Dummy, string](c, "dummies")
+func NewDummyRefMySqlPersistence() *DummyRefMySqlPersistence {
+	c := &DummyRefMySqlPersistence{}
+	c.IdentifiableMySqlPersistence = *persist.InheritIdentifiableMySqlPersistence[*fixtures.Dummy, string](c, "dummies")
 	return c
 }
 
-func (c *DummyRefMysqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
+func (c *DummyRefMySqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
 	filter cdata.FilterParams, paging cdata.PagingParams) (page cdata.DataPage[*fixtures.Dummy], err error) {
 
 	key, ok := filter.GetAsNullableString("Key")
@@ -28,13 +28,13 @@ func (c *DummyRefMysqlPersistence) GetPageByFilter(ctx context.Context, correlat
 	}
 	sorting := ""
 
-	return c.IdentifiableMysqlPersistence.GetPageByFilter(ctx, correlationId,
+	return c.IdentifiableMySqlPersistence.GetPageByFilter(ctx, correlationId,
 		filterObj, paging,
 		sorting, "",
 	)
 }
 
-func (c *DummyRefMysqlPersistence) GetCountByFilter(ctx context.Context, correlationId string,
+func (c *DummyRefMySqlPersistence) GetCountByFilter(ctx context.Context, correlationId string,
 	filter cdata.FilterParams) (count int64, err error) {
 
 	key, ok := filter.GetAsNullableString("Key")
@@ -42,5 +42,5 @@ func (c *DummyRefMysqlPersistence) GetCountByFilter(ctx context.Context, correla
 	if ok && key != "" {
 		filterObj += "`key`='" + key + "'"
 	}
-	return c.IdentifiableMysqlPersistence.GetCountByFilter(ctx, correlationId, filterObj)
+	return c.IdentifiableMySqlPersistence.GetCountByFilter(ctx, correlationId, filterObj)
 }

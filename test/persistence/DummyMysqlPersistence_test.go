@@ -9,9 +9,9 @@ import (
 	tf "github.com/pip-services3-gox/pip-services3-mysql-gox/test/fixtures"
 )
 
-func TestDummyMysqlPersistence(t *testing.T) {
+func TestDummyMySqlPersistence(t *testing.T) {
 
-	var persistence *DummyMysqlPersistence
+	var persistence *DummyMySqlPersistence
 	var fixture tf.DummyPersistenceFixture
 
 	mysqlUri := os.Getenv("MYSQL_URI")
@@ -52,7 +52,7 @@ func TestDummyMysqlPersistence(t *testing.T) {
 		"credential.password", mysqlPassword,
 	)
 
-	persistence = NewDummyMysqlPersistence()
+	persistence = NewDummyMySqlPersistence()
 	fixture = *tf.NewDummyPersistenceFixture(persistence)
 	persistence.Configure(context.Background(), dbConfig)
 
@@ -75,7 +75,7 @@ func TestDummyMysqlPersistence(t *testing.T) {
 		return
 	}
 
-	t.Run("DummyMysqlPersistence:CRUD", fixture.TestCrudOperations)
+	t.Run("DummyMySqlPersistence:CRUD", fixture.TestCrudOperations)
 
 	opnErr = persistence.Clear(context.Background(), "")
 	if opnErr != nil {
@@ -83,7 +83,7 @@ func TestDummyMysqlPersistence(t *testing.T) {
 		return
 	}
 
-	t.Run("DummyMysqlPersistence:Batch", fixture.TestBatchOperations)
+	t.Run("DummyMySqlPersistence:Batch", fixture.TestBatchOperations)
 
 	opnErr = persistence.Clear(context.Background(), "")
 	if opnErr != nil {
@@ -91,5 +91,5 @@ func TestDummyMysqlPersistence(t *testing.T) {
 		return
 	}
 
-	t.Run("DummyMysqlPersistence:Random", fixture.TestRandomOperation)
+	t.Run("DummyMySqlPersistence:Random", fixture.TestRandomOperation)
 }

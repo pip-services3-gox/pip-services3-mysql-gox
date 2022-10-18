@@ -12,11 +12,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDummyMysqlConnection(t *testing.T) {
+func TestDummyMySqlConnection(t *testing.T) {
 
-	var persistence *DummyMysqlPersistence
+	var persistence *DummyMySqlPersistence
 	var fixture tf.DummyPersistenceFixture
-	var connection *conn.MysqlConnection
+	var connection *conn.MySqlConnection
 
 	mysqlUri := os.Getenv("MYSQL_URI")
 	mysqlHost := os.Getenv("MYSQL_HOST")
@@ -56,10 +56,10 @@ func TestDummyMysqlConnection(t *testing.T) {
 		"credential.password", mysqlPassword,
 	)
 
-	connection = conn.NewMysqlConnection()
+	connection = conn.NewMySqlConnection()
 	connection.Configure(context.Background(), dbConfig)
 
-	persistence = NewDummyMysqlPersistence()
+	persistence = NewDummyMySqlPersistence()
 	descr := cref.NewDescriptor("pip-services", "connection", "mysql", "default", "1.0")
 	ref := cref.NewReferencesFromTuples(context.Background(), descr, connection)
 	persistence.SetReferences(context.Background(), ref)
@@ -102,7 +102,7 @@ func TestDummyMysqlConnection(t *testing.T) {
 		assert.NotEqual(t, "", connection.GetDatabaseName())
 	})
 
-	t.Run("DummyMysqlConnection:CRUD", fixture.TestCrudOperations)
+	t.Run("DummyMySqlConnection:CRUD", fixture.TestCrudOperations)
 
 	opnErr = persistence.Clear(context.Background(), "")
 	if opnErr != nil {
@@ -110,6 +110,6 @@ func TestDummyMysqlConnection(t *testing.T) {
 		return
 	}
 
-	t.Run("DummyMysqlConnection:Batch", fixture.TestBatchOperations)
+	t.Run("DummyMySqlConnection:Batch", fixture.TestBatchOperations)
 
 }

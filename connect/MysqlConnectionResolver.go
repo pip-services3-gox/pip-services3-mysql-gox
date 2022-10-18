@@ -32,17 +32,17 @@ import (
 //	References:
 //		- *:discovery:*:*:1.0             (optional) IDiscovery services
 //		- *:credential-store:*:*:1.0      (optional) Credential stores to resolve credentials
-type MysqlConnectionResolver struct {
+type MySqlConnectionResolver struct {
 	// The connections' resolver.
 	ConnectionResolver *cconn.ConnectionResolver
 	// The credentials' resolver.
 	CredentialResolver *cauth.CredentialResolver
 }
 
-// NewMysqlConnectionResolver creates new connection resolver
-//	Returns: *MysqlConnectionResolver
-func NewMysqlConnectionResolver() *MysqlConnectionResolver {
-	mongoCon := MysqlConnectionResolver{}
+// NewMySqlConnectionResolver creates new connection resolver
+//	Returns: *MySqlConnectionResolver
+func NewMySqlConnectionResolver() *MySqlConnectionResolver {
+	mongoCon := MySqlConnectionResolver{}
 	mongoCon.ConnectionResolver = cconn.NewEmptyConnectionResolver()
 	mongoCon.CredentialResolver = cauth.NewEmptyCredentialResolver()
 	return &mongoCon
@@ -52,7 +52,7 @@ func NewMysqlConnectionResolver() *MysqlConnectionResolver {
 //	Parameters:
 //		- ctx context.Context
 //		- config *cconf.ConfigParams configuration parameters to be set.
-func (c *MysqlConnectionResolver) Configure(ctx context.Context, config *cconf.ConfigParams) {
+func (c *MySqlConnectionResolver) Configure(ctx context.Context, config *cconf.ConfigParams) {
 	c.ConnectionResolver.Configure(ctx, config)
 	c.CredentialResolver.Configure(ctx, config)
 }
@@ -61,12 +61,12 @@ func (c *MysqlConnectionResolver) Configure(ctx context.Context, config *cconf.C
 // Parameters:
 //		- ctx context.Context
 //		- references crefer.IReferences references to locate the component dependencies.
-func (c *MysqlConnectionResolver) SetReferences(ctx context.Context, references crefer.IReferences) {
+func (c *MySqlConnectionResolver) SetReferences(ctx context.Context, references crefer.IReferences) {
 	c.ConnectionResolver.SetReferences(ctx, references)
 	c.CredentialResolver.SetReferences(ctx, references)
 }
 
-func (c *MysqlConnectionResolver) validateConnection(correlationId string, connection *cconn.ConnectionParams) error {
+func (c *MySqlConnectionResolver) validateConnection(correlationId string, connection *cconn.ConnectionParams) error {
 	uri := connection.Uri()
 	if uri != "" {
 		return nil
@@ -87,7 +87,7 @@ func (c *MysqlConnectionResolver) validateConnection(correlationId string, conne
 	return nil
 }
 
-func (c *MysqlConnectionResolver) validateConnections(correlationId string, connections []*cconn.ConnectionParams) error {
+func (c *MySqlConnectionResolver) validateConnections(correlationId string, connections []*cconn.ConnectionParams) error {
 	if len(connections) == 0 {
 		return cerr.NewConfigError(correlationId, "NO_CONNECTION", "Database connection is not set")
 	}
@@ -101,7 +101,7 @@ func (c *MysqlConnectionResolver) validateConnections(correlationId string, conn
 	return nil
 }
 
-func (c *MysqlConnectionResolver) composeUri(connections []*cconn.ConnectionParams,
+func (c *MySqlConnectionResolver) composeUri(connections []*cconn.ConnectionParams,
 	credential *cauth.CredentialParams) string {
 
 	// If there is an uri then return it immediately
@@ -191,12 +191,12 @@ func (c *MysqlConnectionResolver) composeUri(connections []*cconn.ConnectionPara
 	return uri
 }
 
-// Resolve method are resolves Mysql connection URI from connection and credential parameters.
+// Resolve method are resolves MySql connection URI from connection and credential parameters.
 //	Parameters:
 //		- ctx context.Context
 //		- correlationId string (optional) transaction id to trace execution through call chain.
 //	Returns: uri string, err error resolved URI and error, if this occured.
-func (c *MysqlConnectionResolver) Resolve(ctx context.Context, correlationId string) (uri string, err error) {
+func (c *MySqlConnectionResolver) Resolve(ctx context.Context, correlationId string) (uri string, err error) {
 
 	connections, err := c.ConnectionResolver.ResolveAll(correlationId)
 	// Validate connections

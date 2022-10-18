@@ -8,24 +8,24 @@ import (
 	"github.com/pip-services3-gox/pip-services3-mysql-gox/test/fixtures"
 )
 
-type DummyJsonMysqlPersistence struct {
-	*persist.IdentifiableJsonMysqlPersistence[fixtures.Dummy, string]
+type DummyJsonMySqlPersistence struct {
+	*persist.IdentifiableJsonMySqlPersistence[fixtures.Dummy, string]
 }
 
-func NewDummyJsonMysqlPersistence() *DummyJsonMysqlPersistence {
-	c := &DummyJsonMysqlPersistence{}
-	c.IdentifiableJsonMysqlPersistence = persist.InheritIdentifiableJsonMysqlPersistence[fixtures.Dummy, string](c, "dummies_json")
+func NewDummyJsonMySqlPersistence() *DummyJsonMySqlPersistence {
+	c := &DummyJsonMySqlPersistence{}
+	c.IdentifiableJsonMySqlPersistence = persist.InheritIdentifiableJsonMySqlPersistence[fixtures.Dummy, string](c, "dummies_json")
 	return c
 }
 
-func (c *DummyJsonMysqlPersistence) DefineSchema() {
+func (c *DummyJsonMySqlPersistence) DefineSchema() {
 	c.ClearSchema()
 	c.EnsureTable("", "")
 	c.EnsureSchema("ALTER TABLE `" + c.TableName + "` ADD `data_key` VARCHAR(50) AS (JSON_UNQUOTE(`data`->\"$.key\"))")
 	c.EnsureIndex(c.TableName+"_json_key", map[string]string{"data_key": "1"}, map[string]string{"unique": "true"})
 }
 
-func (c *DummyJsonMysqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
+func (c *DummyJsonMySqlPersistence) GetPageByFilter(ctx context.Context, correlationId string,
 	filter cdata.FilterParams, paging cdata.PagingParams) (page cdata.DataPage[fixtures.Dummy], err error) {
 
 	key, ok := filter.GetAsNullableString("Key")
@@ -34,13 +34,13 @@ func (c *DummyJsonMysqlPersistence) GetPageByFilter(ctx context.Context, correla
 		filterObj += "data->'$.key'='" + key + "'"
 	}
 
-	return c.IdentifiableJsonMysqlPersistence.GetPageByFilter(ctx, correlationId,
+	return c.IdentifiableJsonMySqlPersistence.GetPageByFilter(ctx, correlationId,
 		filterObj, paging,
 		"", "",
 	)
 }
 
-func (c *DummyJsonMysqlPersistence) GetCountByFilter(ctx context.Context, correlationId string,
+func (c *DummyJsonMySqlPersistence) GetCountByFilter(ctx context.Context, correlationId string,
 	filter cdata.FilterParams) (count int64, err error) {
 
 	filterObj := ""
@@ -48,9 +48,9 @@ func (c *DummyJsonMysqlPersistence) GetCountByFilter(ctx context.Context, correl
 		filterObj += "data->'$.key'='" + key + "'"
 	}
 
-	return c.IdentifiableJsonMysqlPersistence.GetCountByFilter(ctx, correlationId, filterObj)
+	return c.IdentifiableJsonMySqlPersistence.GetCountByFilter(ctx, correlationId, filterObj)
 }
 
-func (c *DummyJsonMysqlPersistence) GetOneRandom(ctx context.Context, correlationId string) (item fixtures.Dummy, err error) {
-	return c.IdentifiableJsonMysqlPersistence.GetOneRandom(ctx, correlationId, "")
+func (c *DummyJsonMySqlPersistence) GetOneRandom(ctx context.Context, correlationId string) (item fixtures.Dummy, err error) {
+	return c.IdentifiableJsonMySqlPersistence.GetOneRandom(ctx, correlationId, "")
 }

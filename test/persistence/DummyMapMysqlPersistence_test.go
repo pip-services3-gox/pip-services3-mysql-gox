@@ -9,9 +9,9 @@ import (
 	tf "github.com/pip-services3-gox/pip-services3-mysql-gox/test/fixtures"
 )
 
-func TestDummyMapMysqlPersistence(t *testing.T) {
+func TestDummyMapMySqlPersistence(t *testing.T) {
 
-	var persistence *DummyMapMysqlPersistence
+	var persistence *DummyMapMySqlPersistence
 	var fixture tf.DummyMapPersistenceFixture
 
 	mysqlUri := os.Getenv("MYSQL_URI")
@@ -52,7 +52,7 @@ func TestDummyMapMysqlPersistence(t *testing.T) {
 		"credential.password", mysqlPassword,
 	)
 
-	persistence = NewDummyMapMysqlPersistence()
+	persistence = NewDummyMapMySqlPersistence()
 	persistence.Configure(context.Background(), dbConfig)
 
 	fixture = *tf.NewDummyMapPersistenceFixture(persistence)
@@ -75,7 +75,7 @@ func TestDummyMapMysqlPersistence(t *testing.T) {
 		return
 	}
 
-	t.Run("DummyMapMysqlPersistence:CRUD", fixture.TestCrudOperations)
+	t.Run("DummyMapMySqlPersistence:CRUD", fixture.TestCrudOperations)
 
 	opnErr = persistence.Clear(context.Background(), "")
 	if opnErr != nil {
@@ -83,6 +83,6 @@ func TestDummyMapMysqlPersistence(t *testing.T) {
 		return
 	}
 
-	t.Run("DummyMapMysqlPersistence:Batch", fixture.TestBatchOperations)
+	t.Run("DummyMapMySqlPersistence:Batch", fixture.TestBatchOperations)
 
 }

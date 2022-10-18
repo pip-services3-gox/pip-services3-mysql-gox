@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMysqlConnectionResolver(t *testing.T) {
+func TestMySqlConnectionResolver(t *testing.T) {
 
 	dbConfig := cconf.NewConfigParamsFromTuples(
 		"connection.host", "localhost",
@@ -20,7 +20,7 @@ func TestMysqlConnectionResolver(t *testing.T) {
 		"credential.password", "mysql",
 	)
 
-	resolver := conn.NewMysqlConnectionResolver()
+	resolver := conn.NewMySqlConnectionResolver()
 	resolver.Configure(context.Background(), dbConfig)
 
 	uri, err := resolver.Resolve(context.Background(), "")
